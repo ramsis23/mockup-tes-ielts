@@ -36,6 +36,16 @@ BLOCKED = ('/data', '/server.py', '/.claude', '/tools', '/.git')
 _lock = threading.Lock()
 
 
+def log(msg):
+    """Write to stderr. A windowed desktop build has no console (sys.stderr is None), so never raise."""
+    try:
+        if sys.stderr is not None:
+            sys.stderr.write(msg + '\n')
+            sys.stderr.flush()
+    except Exception:
+        pass
+
+
 def db():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
@@ -119,7 +129,10 @@ class Handler(SimpleHTTPRequestHandler):
 
     def log_message(self, fmt, *args):
         if '/api/' in (self.path or ''):
-            sys.stderr.write('%s %s\n' % (self.command, self.path.split('?')[0]))
+            log('%s %s' % (self.command, self.path.split('?')[0]))
+
+    def log_error(self, fmt, *args):
+        log(fmt % args)
 
     # ---------------------------------------------------------------- routing
     def do_GET(self):
@@ -157,7 +170,7 @@ class Handler(SimpleHTTPRequestHandler):
         except ApiError as e:
             self.json(e.status, {'error': e.message})
         except Exception as e:  # pragma: no cover - logged for local debugging
-            sys.stderr.write('API error: %r\n' % e)
+            log('API error: %r' % e)
             self.json(500, {'error': 'Server error'})
 
     # ---------------------------------------------------------------- helpers

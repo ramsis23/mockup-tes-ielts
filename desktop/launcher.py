@@ -26,6 +26,16 @@ def data_dir():
 
 
 os.environ.setdefault('IELTS_DB_PATH', os.path.join(data_dir(), 'ielts.db'))
+
+# A windowed build (PyInstaller console=False) has no console: sys.stdout/sys.stderr are None and
+# anything written to them raises. Send output to a log file in the data folder instead.
+if sys.stdout is None or sys.stderr is None:
+    try:
+        _log = open(os.path.join(data_dir(), 'ielts.log'), 'a', encoding='utf-8', buffering=1)
+    except OSError:
+        _log = open(os.devnull, 'w')
+    sys.stdout = sys.stdout or _log
+    sys.stderr = sys.stderr or _log
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 import server  # noqa: E402  (needs IELTS_DB_PATH set first)
 
