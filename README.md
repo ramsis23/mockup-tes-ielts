@@ -13,16 +13,18 @@ Writing, dengan tampilan dan perilaku yang meniru tes IELTS di komputer.
 ## Daftar isi
 
 1. [Fitur](#fitur)
-2. [Kebutuhan sistem](#kebutuhan-sistem)
-3. [Instalasi](#instalasi)
-4. [Menjalankan aplikasi](#menjalankan-aplikasi)
-5. [Cara memakai](#cara-memakai)
-6. [Audio Listening](#audio-listening)
-7. [Struktur folder](#struktur-folder)
-8. [Data akun dan database](#data-akun-dan-database)
-9. [Menambah atau mengubah soal](#menambah-atau-mengubah-soal)
-10. [Pemecahan masalah](#pemecahan-masalah)
-11. [Catatan keamanan](#catatan-keamanan)
+2. [Aplikasi desktop (installer Windows & Mac)](#aplikasi-desktop-installer-windows--mac)
+3. [Kebutuhan sistem](#kebutuhan-sistem)
+4. [Instalasi](#instalasi)
+5. [Menjalankan aplikasi](#menjalankan-aplikasi)
+6. [Cara memakai](#cara-memakai)
+7. [Audio Listening](#audio-listening)
+8. [Struktur folder](#struktur-folder)
+9. [Data akun dan database](#data-akun-dan-database)
+10. [Menambah atau mengubah soal](#menambah-atau-mengubah-soal)
+11. [Membuat installer sendiri](#membuat-installer-sendiri)
+12. [Pemecahan masalah](#pemecahan-masalah)
+13. [Catatan keamanan](#catatan-keamanan)
 
 ---
 
@@ -48,6 +50,55 @@ Writing, dengan tampilan dan perilaku yang meniru tes IELTS di komputer.
   text-to-speech browser.
 
 Speaking tidak disertakan karena pada tes asli dilakukan tatap muka dengan examiner.
+
+---
+
+## Aplikasi desktop (installer Windows & Mac)
+
+Cara paling mudah: pasang aplikasinya, tanpa Python dan tanpa terminal.
+
+1. Buka halaman **[Releases](https://github.com/ramsis23/mockup-tes-ielts/releases)** di GitHub.
+2. Unduh file sesuai komputer Anda:
+
+   | Komputer | File |
+   |---|---|
+   | Windows 10/11 | `IELTS-Practice-Setup-<versi>.exe` |
+   | Mac Apple Silicon (M1/M2/M3/M4) | `IELTS-Practice-<versi>-mac-arm64.dmg` |
+   | Mac Intel | `IELTS-Practice-<versi>-mac-x86_64.dmg` |
+
+   Cek jenis Mac: menu Apple → *About This Mac*. "Chip Apple M…" = Apple Silicon, "Processor Intel" = Intel.
+
+3. Pasang:
+   - **Windows**: jalankan file `.exe`, ikuti langkahnya. Ikon *IELTS Practice* muncul di Start Menu
+     (dan Desktop jika dipilih).
+   - **Mac**: buka file `.dmg`, seret *IELTS Practice* ke folder **Applications**.
+
+4. Jalankan *IELTS Practice*. Browser akan terbuka otomatis ke halaman tes, dan muncul jendela kecil
+   berisi tombol **Open in browser** dan **Quit**. Biarkan jendela kecil itu terbuka selama latihan;
+   klik **Quit** untuk menutup aplikasi.
+
+### Peringatan keamanan saat pertama kali dibuka
+
+Installer belum ditandatangani sertifikat developer berbayar, jadi sistem operasi menampilkan peringatan.
+Ini normal untuk aplikasi gratis dan aman dilewati:
+
+- **Windows** ("Windows protected your PC"): klik **More info → Run anyway**.
+- **macOS** ("cannot be opened because the developer cannot be verified"): klik kanan aplikasi di
+  Applications → **Open** → **Open**. Di macOS 15 ke atas: buka **System Settings → Privacy & Security**,
+  gulir ke bawah, klik **Open Anyway**.
+  Alternatif lewat Terminal:
+  ```bash
+  xattr -dr com.apple.quarantine "/Applications/IELTS Practice.app"
+  ```
+
+### Lokasi data aplikasi desktop
+
+Akun dan riwayat nilai versi desktop disimpan terpisah dari versi `server.py`:
+
+- **Windows**: `%APPDATA%\IELTS Practice\ielts.db`
+- **macOS**: `~/Library/Application Support/IELTS Practice/ielts.db`
+
+Menghapus (uninstall) aplikasi tidak menghapus data ini. Hapus file di atas jika ingin mengosongkan semua akun.
 
 ---
 
@@ -222,6 +273,13 @@ mockup-tes-ielts/
 ├── tools/
 │   ├── validate.mjs      Validasi file soal
 │   └── generate-audio.mjs  Pembuat MP3 dari transkrip (macOS)
+├── desktop/
+│   ├── launcher.py       Titik masuk aplikasi desktop (server + browser + jendela kontrol)
+│   ├── ielts.spec        Konfigurasi PyInstaller
+│   ├── build-mac.sh      Build .app dan .dmg (macOS)
+│   ├── build-windows.ps1 Build installer .exe (Windows)
+│   └── windows-installer.iss  Skrip Inno Setup
+├── .github/workflows/release.yml  Build installer otomatis di GitHub Actions
 └── data/ielts.db         Database akun & progres (dibuat otomatis, tidak ikut ke Git)
 ```
 
@@ -254,6 +312,51 @@ mockup-tes-ielts/
 
 ---
 
+## Membuat installer sendiri
+
+### Otomatis lewat GitHub Actions (disarankan)
+
+Installer Windows dan Mac (Intel + Apple Silicon) dibuat otomatis oleh
+[`.github/workflows/release.yml`](.github/workflows/release.yml):
+
+- **Rilis versi baru**: buat tag berawalan `v`, lalu push.
+  ```bash
+  git tag v1.0.0
+  git push origin v1.0.0
+  ```
+  Sekitar 10–15 menit kemudian, installer muncul di halaman **Releases**.
+- **Uji build tanpa rilis**: tab **Actions → Build desktop apps → Run workflow**. Hasilnya bisa
+  diunduh dari bagian *Artifacts* di halaman run tersebut.
+
+Untuk versi berikutnya, naikkan nomornya (misalnya `v1.0.1`, `v1.1.0`).
+
+### Manual di macOS
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install pyinstaller
+PATH="$PWD/.venv/bin:$PATH" bash desktop/build-mac.sh 1.0.0
+```
+
+Hasil: `dist/IELTS Practice.app` dan `dist/IELTS-Practice-1.0.0-mac-<arsitektur>.dmg`.
+File `.dmg` hanya berjalan di jenis Mac yang sama dengan Mac tempat build (Intel atau Apple Silicon).
+
+### Manual di Windows
+
+1. Pasang Python 3 dan [Inno Setup 6](https://jrsoftware.org/isdl.php) (tambahkan folder Inno Setup ke PATH).
+2. Di PowerShell, dari folder proyek:
+   ```powershell
+   python -m pip install pyinstaller
+   .\desktop\build-windows.ps1 -Version 1.0.0
+   ```
+
+Hasil: `dist\IELTS-Practice-Setup-1.0.0.exe`.
+
+Installer tidak bisa dibuat silang: installer Windows harus dibuat di Windows, dan `.dmg` di macOS.
+Karena itu GitHub Actions dipakai untuk membuat keduanya sekaligus.
+
+---
+
 ## Pemecahan masalah
 
 | Masalah | Penyebab dan solusi |
@@ -264,6 +367,8 @@ mockup-tes-ielts/
 | Audio Listening tidak terdengar | Cek volume dan headphone, klik *Play sound* di layar tes suara. Pastikan file MP3 ada di folder `audio/`. |
 | Suara text-to-speech terdengar kaku | Pakai MP3 yang sudah disediakan, atau pilih suara lain di layar tes suara. |
 | Lupa password | Belum ada fitur reset. Hapus `data/ielts.db` untuk mengosongkan semua akun (semua riwayat ikut terhapus). |
+| Aplikasi desktop tidak terbuka di Mac | Lihat [peringatan keamanan](#peringatan-keamanan-saat-pertama-kali-dibuka). |
+| Aplikasi desktop dibuka dua kali | Tidak masalah; pembukaan kedua hanya membuka browser ke aplikasi yang sudah berjalan. |
 | Tampilan berantakan setelah update | Muat ulang paksa: Ctrl+Shift+R (Windows/Linux) atau Cmd+Shift+R (macOS). |
 
 ---

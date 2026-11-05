@@ -21,8 +21,10 @@ from http import cookies
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlparse
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(ROOT, 'data', 'ielts.db')
+# Inside a PyInstaller bundle the web files live in sys._MEIPASS.
+ROOT = getattr(sys, '_MEIPASS', None) or os.path.dirname(os.path.abspath(__file__))
+# The desktop app keeps the database in the user's data folder (set by desktop/launcher.py).
+DB_PATH = os.environ.get('IELTS_DB_PATH') or os.path.join(ROOT, 'data', 'ielts.db')
 SESSION_DAYS = 30
 COOKIE = 'ielts_session'
 EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
@@ -137,6 +139,7 @@ class Handler(SimpleHTTPRequestHandler):
     def api(self, method, path):
         try:
             route = {
+                ('GET', '/api/ping'): lambda: self.json(200, {'app': 'ielts-practice'}),
                 ('POST', '/api/register'): self.register,
                 ('POST', '/api/login'): self.login,
                 ('POST', '/api/logout'): self.logout,
@@ -372,13 +375,8 @@ class Server6(Server):
     address_family = socket.AF_INET6
 
 
-def main():
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5173
-    # Browsers may resolve "localhost" to IPv6 first, so another server on the same port
-    # (e.g. "python3 -m http.server") would silently take the requests and the API would fail.
-    if port_in_use(port):
-        sys.exit('Port %d is already in use by another program (for example "python3 -m http.server %d").\n'
-                 'Stop that program first (Ctrl+C in its terminal), or run: python3 server.py <other-port>' % (port, port))
+def start_servers(port):
+    """Create the database and start serving on localhost; the first server is not yet running."""
     init_db()
     servers = [Server(('127.0.0.1', port), Handler)]
     try:
@@ -387,6 +385,17 @@ def main():
         pass
     for srv in servers[1:]:
         threading.Thread(target=srv.serve_forever, daemon=True).start()
+    return servers
+
+
+def main():
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5173
+    # Browsers may resolve "localhost" to IPv6 first, so another server on the same port
+    # (e.g. "python3 -m http.server") would silently take the requests and the API would fail.
+    if port_in_use(port):
+        sys.exit('Port %d is already in use by another program (for example "python3 -m http.server %d").\n'
+                 'Stop that program first (Ctrl+C in its terminal), or run: python3 server.py <other-port>' % (port, port))
+    servers = start_servers(port)
     print('IELTS Practice Test running at http://localhost:%d  (database: %s)' % (port, os.path.relpath(DB_PATH, ROOT)))
     print('Keep this window open while you use the app. Press Ctrl+C to stop.')
     try:
