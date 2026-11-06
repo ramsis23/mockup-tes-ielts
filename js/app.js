@@ -2,7 +2,8 @@
   'use strict';
 
   let D = null;
-  const TEST_COUNT = 10;
+  // Tests 11+ are Academic-only (no General Training Reading/Writing).
+  const TEST_COUNTS = { academic: 13, general: 10 };
   const TYPES = { academic: 'Academic', general: 'General Training' };
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -262,7 +263,7 @@
     render(`${simpleHeader(false)}
       <main class="page"><div class="card wide">
         <h1>IELTS on Computer – Practice Tests</h1>
-        <p class="lead">${TEST_COUNT} complete practice tests for both <b>Academic</b> and <b>General Training</b>. The interface reproduces the computer-delivered IELTS test: the timer, the question navigator, split-screen reading, highlighting and notes, and on-screen writing with a word count.</p>
+        <p class="lead">${TEST_COUNTS.academic} complete Academic and ${TEST_COUNTS.general} General Training practice tests. The interface reproduces the computer-delivered IELTS test: the timer, the question navigator, split-screen reading, highlighting and notes, and on-screen writing with a word count.</p>
         <div class="info-grid">
           <div><h3>Listening</h3><p>4 parts · 40 questions<br>~30 minutes</p></div>
           <div><h3>Reading</h3><p>3 passages · 40 questions<br>60 minutes</p></div>
@@ -435,7 +436,7 @@
     if (state.user) {
       try { await refreshProgress(); } catch (e) { if (e.status === 401) return; showError(e); }
     }
-    const tests = Array.from({ length: TEST_COUNT }, (_, i) => i + 1).map(n => {
+    const tests = Array.from({ length: TEST_COUNTS[state.type] }, (_, i) => i + 1).map(n => {
       const bits = ['listening', 'reading', 'writing'].map(m => {
         const s = latest(state.type, n, m, 'submitted');
         const o = latest(state.type, n, m, 'in_progress');
@@ -804,7 +805,15 @@
     } else if (g.type === 'match') {
       // Plan/map labelling uses bare letters, so a box listing them would only repeat each letter.
       const lettersOnly = g.options.every(o => !o.t || o.t === o.k);
-      if ((g.display || (lettersOnly ? 'radio' : 'select')) === 'radio') {
+      const display = g.display || (lettersOnly ? 'radio' : 'select');
+      if (display === 'grid') {
+        // Table: one row per question, one radio column per option letter ("click on the correct space in the table").
+        body = `${lettersOnly ? '' : `<div class="opt-box">${g.boxTitle ? `<h4>${g.boxTitle}</h4>` : ''}${g.options.map(o => `<div class="opt-row"><b>${o.k}</b><span>${o.t}</span></div>`).join('')}</div>`}
+        <table class="match-grid"><thead><tr><th></th>${g.options.map(o => `<th scope="col">${o.k}</th>`).join('')}</tr></thead><tbody>
+        ${g.questions.map(q => `<tr class="q" id="q-${q.n}" data-q="${q.n}"><th scope="row"><span class="qnum">${q.n}</span><span class="q-text">${q.text}</span></th>
+          ${g.options.map(o => `<td><label><input type="radio" name="r-${q.n}" value="${o.k}" aria-label="Question ${q.n}: ${o.k}"></label></td>`).join('')}</tr>`).join('')}
+        </tbody></table>`;
+      } else if (display === 'radio') {
         // One radio list per question, two columns (as in the computer-delivered test).
         body = `<div class="q-grid">${g.questions.map(q => `<div class="q choice" id="q-${q.n}" data-q="${q.n}">
           <div class="q-line"><span class="qnum">${q.n}</span><span class="q-text">${q.text}</span></div>

@@ -2,7 +2,7 @@
 //   --engine say          suara macOS (mis. "Daniel (Enhanced)"); default di macOS
 //   --engine voicestudio  VoiceStudio lokal (OmniVoice, http://127.0.0.1:3900); default di Windows/Linux
 //
-//   node tools/generate-audio.mjs              -> semua tes (1-10), semua part
+//   node tools/generate-audio.mjs              -> semua tes, semua part
 //   node tools/generate-audio.mjs 1 3          -> hanya tes 1 dan 3
 //   node tools/generate-audio.mjs 1 --part 1   -> hanya tes 1 part 1
 //   --force              timpa MP3 yang sudah ada
@@ -27,7 +27,7 @@ const flag = name => { const i = args.indexOf(name); return i >= 0 ? args[i + 1]
 const force = args.includes('--force');
 const onlyPart = flag('--part') ? +flag('--part') : null;
 const nos = args.filter((a, i) => /^\d+$/.test(a) && !VALUE_FLAGS.includes(args[i - 1])).map(Number);
-const tests = nos.length ? nos : Array.from({ length: 10 }, (_, i) => i + 1);
+const tests = nos.length ? nos : fs.readdirSync(path.join(root, 'js/tests')).map(f => +(f.match(/^test-(\d+)\.js$/) || [])[1]).filter(Boolean).sort((a, b) => a - b);
 const engine = flag('--engine') || (process.platform === 'darwin' ? 'say' : 'voicestudio');
 const outDir = path.resolve(root, flag('--out-dir') || 'audio');
 

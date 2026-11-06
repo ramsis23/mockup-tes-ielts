@@ -11,7 +11,10 @@ vm.createContext(ctx);
 vm.runInContext(fs.readFileSync(path.join(root, 'js/registry.js'), 'utf8'), ctx);
 
 const nos = process.argv.slice(2).map(Number).filter(Boolean);
-const list = nos.length ? nos : Array.from({ length: 10 }, (_, i) => i + 1);
+const allTests = fs.readdirSync(path.join(root, 'js/tests')).map(f => +(f.match(/^test-(\d+)\.js$/) || [])[1]).filter(Boolean).sort((a, b) => a - b);
+const list = nos.length ? nos : allTests;
+// Tests 11+ are Academic-only: no General Training Reading/Writing.
+const ACADEMIC_ONLY_FROM = 11;
 const errors = [];
 const warn = [];
 
@@ -20,7 +23,8 @@ for (const no of list) {
   if (!fs.existsSync(file)) { errors.push(`test ${no}: file missing`); continue; }
   try { vm.runInContext(fs.readFileSync(file, 'utf8'), ctx, { filename: file }); }
   catch (e) { errors.push(`test ${no}: syntax/runtime error: ${e.message}`); continue; }
-  for (const kind of ['listening', 'reading-academic', 'reading-general', 'writing-academic', 'writing-general']) {
+  const kinds = ['listening', 'reading-academic', 'writing-academic'].concat(no >= ACADEMIC_ONLY_FROM ? [] : ['reading-general', 'writing-general']);
+  for (const kind of kinds) {
     const d = ctx.IELTS.get(kind, no);
     const tag = `test ${no} ${kind}`;
     if (!d) { errors.push(`${tag}: not registered`); continue; }

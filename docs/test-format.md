@@ -107,6 +107,10 @@ untuk "matching information" yang boleh memakai huruf paragraf A–G.
 Tampilan: jika semua opsi hanya huruf (`{ k: 'A', t: 'A' }`, untuk label peta/denah), tiap soal tampil sebagai
 daftar radio A–H dalam dua kolom. Jika opsi berisi teks, defaultnya kotak daftar opsi + dropdown. `display: 'radio'`
 memaksa daftar radio berikut teks opsinya (gaya "26 forming questions: A – get permission …").
+`display: 'grid'` menampilkan tabel: satu baris per soal, satu kolom radio per huruf ("click on the correct space
+in the table"), cocok untuk matching features dan label peta/denah; opsi berteks tetap ditampilkan di kotak di atasnya.
+
+Tests 11+ hanya Academic: daftarkan `listening`, `reading-academic`, `writing-academic` saja.
 
 ### Gambar (`figure`) — peta, denah, diagram
 

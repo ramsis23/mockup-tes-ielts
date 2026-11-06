@@ -204,6 +204,16 @@ a { color: var(--accent); }
 .q.match .q-text { flex: 1; min-width: 160px; }
 .q.match select { min-width: 90px; height: 32px; border: 1px solid #555; border-radius: 2px; background: var(--bg); padding: 0 6px; }
 
+.match-grid { border-collapse: collapse; margin: 4px 0 8px; max-width: 100%; }
+.match-grid th, .match-grid td { border: 1px solid var(--line); padding: 6px 10px; text-align: center; }
+.match-grid thead th { background: var(--panel); min-width: 38px; }
+.match-grid tbody th { text-align: left; font-weight: 400; }
+.match-grid tbody th .qnum { margin-right: 10px; }
+.match-grid td label { display: block; cursor: pointer; }
+.match-grid td input { width: 18px; height: 18px; accent-color: var(--fg); cursor: pointer; }
+.match-grid tr.q { border-radius: 0; }
+.match-grid tr.q.q-active th, .match-grid tr.q.q-active td { background: var(--accent-soft); }
+.match-grid td:has(input:checked) { background: var(--panel-2); }
 .q-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 4px 28px; }
 .q-grid .q { margin-right: 0; }
 
