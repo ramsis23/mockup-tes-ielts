@@ -1,0 +1,8 @@
+{
+  "appId": "io.github.ramsis23.ieltspractice",
+  "appName": "IELTS Practice",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  }
+}

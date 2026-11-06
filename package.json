@@ -1,0 +1,16 @@
+{
+  "name": "ielts-practice",
+  "private": true,
+  "version": "1.2.1",
+  "description": "IELTS computer-delivered practice tests (web, desktop and Android).",
+  "scripts": {
+    "build:web": "node tools/build-web.mjs",
+    "android:sync": "node tools/build-web.mjs && npx cap sync android",
+    "android:apk": "node tools/build-web.mjs && npx cap sync android && cd android && ./gradlew assembleRelease"
+  },
+  "devDependencies": {
+    "@capacitor/android": "7.6.10",
+    "@capacitor/cli": "7.6.10",
+    "@capacitor/core": "7.6.10"
+  }
+}

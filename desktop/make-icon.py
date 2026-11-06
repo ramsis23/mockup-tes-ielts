@@ -56,26 +56,28 @@ def book_page(left):
     return [(round(x * K), round(y * K)) for x, y in pts]
 
 
-def build():
+def background(full_bleed=False):
+    """Gradient tile (+ soft glow). full_bleed=True fills the whole square (Android adaptive/round icons)."""
     img = Image.new('RGBA', (S, S), (0, 0, 0, 0))
-
-    # Soft shadow under the tile.
-    shadow = Image.new('L', (S, S), 0)
-    ImageDraw.Draw(shadow).rounded_rectangle(u(70, 92, 954, 976), radius=round(200 * K), fill=110)
-    shadow = shadow.filter(ImageFilter.GaussianBlur(28 * K))
-    img.paste((15, 23, 42, 255), (0, 0), shadow)
-
-    # Tile with gradient.
+    box, radius = ((0, 0, 1024, 1024), 0) if full_bleed else ((64, 64, 960, 960), 200)
+    if not full_bleed:
+        # Soft shadow under the tile.
+        shadow = Image.new('L', (S, S), 0)
+        ImageDraw.Draw(shadow).rounded_rectangle(u(70, 92, 954, 976), radius=round(200 * K), fill=110)
+        shadow = shadow.filter(ImageFilter.GaussianBlur(28 * K))
+        img.paste((15, 23, 42, 255), (0, 0), shadow)
     tile = gradient(S, (67, 56, 202), (14, 165, 233)).convert('RGBA')
-    img.paste(tile, (0, 0), rounded_mask((64, 64, 960, 960), 200))
-
-    # Soft glow behind the artwork (blurred, so no hard edge).
+    img.paste(tile, (0, 0), rounded_mask(box, radius))
     glow = Image.new('L', (S, S), 0)
     ImageDraw.Draw(glow).ellipse(u(200, 160, 824, 784), fill=60)
     glow = glow.filter(ImageFilter.GaussianBlur(90 * K))
-    glow = Image.composite(glow, Image.new('L', (S, S), 0), rounded_mask((64, 64, 960, 960), 200))
+    glow = Image.composite(glow, Image.new('L', (S, S), 0), rounded_mask(box, radius))
     img.paste((255, 255, 255, 255), (0, 0), glow)
+    return img
 
+
+def build(tile=True, full_bleed=False):
+    img = background(full_bleed) if tile else Image.new('RGBA', (S, S), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     white = (255, 255, 255, 255)
     deep = (49, 46, 129, 255)
@@ -105,9 +107,62 @@ def build():
     return img.resize((1024, 1024), Image.LANCZOS)
 
 
+def scaled_center(img, factor):
+    """Shrink a 1024 image by `factor` and centre it on a transparent 1024 canvas."""
+    out = Image.new('RGBA', (1024, 1024), (0, 0, 0, 0))
+    n = round(1024 * factor)
+    out.alpha_composite(img.resize((n, n), Image.LANCZOS), ((1024 - n) // 2, (1024 - n) // 2))
+    return out
+
+
+def android(res_dir):
+    """Launcher icons (legacy, round, adaptive) and splash screens for the Capacitor Android app."""
+    densities = {'mdpi': 1, 'hdpi': 1.5, 'xhdpi': 2, 'xxhdpi': 3, 'xxxhdpi': 4}
+    legacy = build()
+    full = build(full_bleed=True)
+    circle = Image.new('L', (1024, 1024), 0)
+    ImageDraw.Draw(circle).ellipse((0, 0, 1023, 1023), fill=255)
+    round_icon = Image.new('RGBA', (1024, 1024), (0, 0, 0, 0))
+    round_icon.paste(full, (0, 0), circle)
+    # Adaptive icon: the launcher masks a 108dp layer to its own shape; keep the artwork inside the
+    # 66dp safe zone (artwork spans ~70% of the design grid, so 0.66 keeps it well inside).
+    fg = scaled_center(build(tile=False), 0.66)
+    bg = background(full_bleed=True).resize((1024, 1024), Image.LANCZOS)
+    for name, k in densities.items():
+        d = os.path.join(res_dir, 'mipmap-' + name)
+        os.makedirs(d, exist_ok=True)
+        legacy.resize((round(48 * k),) * 2, Image.LANCZOS).save(os.path.join(d, 'ic_launcher.png'))
+        round_icon.resize((round(48 * k),) * 2, Image.LANCZOS).save(os.path.join(d, 'ic_launcher_round.png'))
+        fg.resize((round(108 * k),) * 2, Image.LANCZOS).save(os.path.join(d, 'ic_launcher_foreground.png'))
+        bg.resize((round(108 * k),) * 2, Image.LANCZOS).convert('RGB').save(os.path.join(d, 'ic_launcher_background.png'))
+    anydpi = os.path.join(res_dir, 'mipmap-anydpi-v26')
+    os.makedirs(anydpi, exist_ok=True)
+    xml = ('<?xml version="1.0" encoding="utf-8"?>\n<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">\n'
+           '    <background android:drawable="@mipmap/ic_launcher_background"/>\n'
+           '    <foreground android:drawable="@mipmap/ic_launcher_foreground"/>\n</adaptive-icon>\n')
+    for f in ('ic_launcher.xml', 'ic_launcher_round.xml'):
+        with open(os.path.join(anydpi, f), 'w', encoding='utf-8') as fh:
+            fh.write(xml)
+    # Splash screens: keep each existing file's size, white background with the icon in the middle.
+    for root, _, files in os.walk(res_dir):
+        for f in files:
+            if f == 'splash.png':
+                path = os.path.join(root, f)
+                w, h = Image.open(path).size
+                s = Image.new('RGB', (w, h), (255, 255, 255))
+                n = round(min(w, h) * 0.36)
+                s.paste(legacy.resize((n, n), Image.LANCZOS), ((w - n) // 2, (h - n) // 2), legacy.resize((n, n), Image.LANCZOS))
+                s.save(path)
+
+
 if __name__ == '__main__':
+    import sys
     icon = build()
     icon.save(os.path.join(HERE, 'icon.png'))
     icon.save(os.path.join(HERE, 'icon.ico'), sizes=[(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)])
     icon.save(os.path.join(HERE, 'icon.icns'))
     print('Wrote desktop/icon.png, icon.ico, icon.icns')
+    res = os.path.join(HERE, '..', 'android', 'app', 'src', 'main', 'res')
+    if os.path.isdir(res):
+        android(res)
+        print('Wrote Android launcher icons and splash screens')

@@ -7,3 +7,5 @@ dist/
 .venv/
 audio/preview/
 tools/voicestudio-voices/
+node_modules/
+www/

@@ -210,6 +210,17 @@
   /* ------------------------------------------------------------------ api */
   // All account and progress data lives in SQLite behind server.py.
   async function api(path, opts = {}) {
+    if (window.LocalApi) {
+      // Android app: no Python server, data is stored on the device (js/local-api.js).
+      const r = await LocalApi.request(opts.method || (opts.body ? 'POST' : 'GET'), path, opts.body);
+      if (r.status >= 400) {
+        const err = new Error(r.data.error || `Request failed (${r.status})`);
+        err.status = r.status;
+        if (r.status === 401 && state.user && !opts.quiet) sessionExpired();
+        throw err;
+      }
+      return r.data;
+    }
     let res;
     try {
       res = await fetch(path, {

@@ -397,6 +397,17 @@ span.part-label { cursor: default; }
 .voice-row { display: grid; grid-template-columns: 120px 1fr auto; gap: 8px; align-items: center; margin: 8px 0; }
 .voice-row select { min-width: 0; height: 34px; border: 1px solid #555; background: var(--bg); padding: 0 6px; }
 .small-btn { padding: 6px 12px; }
+/* Phones (Android app): keep the test header on one line. */
+@media (max-width: 480px) {
+  .topbar { padding-left: 12px; padding-right: 8px; }
+  .brand-mark { font-size: 1.15rem; }
+  .timer { white-space: nowrap; font-size: .92rem; gap: 4px; }
+  .tb-right { gap: 2px; }
+  .tb-right .icon-btn.static, .save-state { display: none; }
+  .tb-text { padding: 4px 8px; }
+  .match-grid th, .match-grid td { padding: 5px 6px; }
+  .match-grid thead th { min-width: 28px; }
+}
 @media (max-width: 760px) { .voice-row { grid-template-columns: 1fr auto; } .voice-row label { grid-column: 1 / -1; } }
 
 /* ------------------------------------------------------ account & dashboard */

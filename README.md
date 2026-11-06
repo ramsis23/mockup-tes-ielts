@@ -102,6 +102,49 @@ Menghapus (uninstall) aplikasi tidak menghapus data ini. Hapus file di atas jika
 
 ---
 
+## Aplikasi Android (APK)
+
+Setiap rilis di [Releases](https://github.com/ramsis23/mockup-tes-ielts/releases) juga berisi
+`IELTS-Practice-x.y.z-android.apk`.
+
+**Memasang APK:**
+
+1. Unduh file APK di HP.
+2. Buka file tersebut.
+3. Izinkan **Install unknown apps** untuk browser atau file manager yang dipakai.
+
+Aplikasi Android tidak memakai `server.py`. Akun, jawaban yang tersimpan, dan riwayat nilai disimpan **di HP
+itu sendiri** (`js/local-api.js`, endpoint sama dengan server). Data ini tidak tersinkron dengan versi desktop,
+dan hilang jika aplikasi di-uninstall atau datanya dihapus.
+
+**Kunci tanda tangan (signing key):** agar versi baru bisa dipasang menimpa versi lama, setiap rilis harus
+ditandatangani dengan kunci yang sama. Simpan keystore Anda sendiri sebagai repository secrets di GitHub
+(Settings → Secrets and variables → Actions):
+
+| Secret | Isi |
+|---|---|
+| `ANDROID_KEYSTORE_BASE64` | isi file `.jks` dalam base64 |
+| `ANDROID_KEYSTORE_PASSWORD` | password keystore |
+| `ANDROID_KEY_ALIAS` | alias kunci |
+| `ANDROID_KEY_PASSWORD` | password kunci |
+
+Tanpa secrets, APK ditandatangani dengan debug key sementara. APK itu tetap bisa dipasang, tetapi versi berikutnya
+harus didahului uninstall.
+
+**Build manual** (perlu Node 20+, JDK 21 dan Android SDK):
+
+```bash
+npm install
+npm run android:apk        # hasil: android/app/build/outputs/apk/release/app-release.apk
+```
+
+Coba mode penyimpanan lokal di browser biasa dengan `http://localhost:5173/?local=1`.
+
+Listening memakai MP3 di folder `audio/`. WebView Android umumnya tidak mendukung text-to-speech browser, jadi
+part yang belum punya MP3 tidak bersuara di Android.
+
+---
+
 ## Kebutuhan sistem
 
 | Kebutuhan | Keterangan |
