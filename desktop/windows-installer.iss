@@ -20,6 +20,7 @@ OutputBaseFilename=IELTS-Practice-Setup-{#AppVersion}
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
+SetupIconFile=icon.ico
 UninstallDisplayIcon={app}\{#AppName}.exe
 
 [Tasks]

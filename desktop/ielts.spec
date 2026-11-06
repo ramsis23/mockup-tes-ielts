@@ -6,7 +6,7 @@ ROOT = os.path.abspath(os.path.join(SPECPATH, '..'))
 APP_NAME = 'IELTS Practice'
 VERSION = os.environ.get('APP_VERSION', '1.0.0')
 
-datas = [(os.path.join(ROOT, 'index.html'), '.')]
+datas = [(os.path.join(ROOT, 'index.html'), '.'), (os.path.join(ROOT, 'favicon.png'), '.')]
 for folder in ('css', 'js', 'audio'):
     datas.append((os.path.join(ROOT, folder), folder))
 
@@ -27,7 +27,7 @@ exe = EXE(
     exclude_binaries=True,
     name=APP_NAME,
     console=False,
-    icon=os.path.join(ROOT, 'desktop', 'icon.ico') if sys.platform == 'win32' and os.path.exists(os.path.join(ROOT, 'desktop', 'icon.ico')) else None,
+    icon=os.path.join(ROOT, 'desktop', 'icon.ico' if sys.platform == 'win32' else 'icon.icns'),
 )
 coll = COLLECT(exe, a.binaries, a.datas, name=APP_NAME)
 
@@ -35,6 +35,7 @@ if sys.platform == 'darwin':
     app = BUNDLE(
         coll,
         name=APP_NAME + '.app',
+        icon=os.path.join(ROOT, 'desktop', 'icon.icns'),
         bundle_identifier='io.github.ramsis23.ielts-practice',
         version=VERSION,
         info_plist={
