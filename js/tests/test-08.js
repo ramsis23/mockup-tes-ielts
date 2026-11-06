@@ -123,13 +123,69 @@
           },
           {
             type: 'match', from: 15, to: 20,
-            instr: `Label the map below.<br>Write the correct letter, <b>A–H</b>, next to Questions 15–20.
-              <table class="form-table" style="text-align:center;margin-top:8px">
-                <tr><td colspan="4"><b>Greenhill Valley Music Festival – Site Map</b> (north at top)</td></tr>
-                <tr><td><b>MAIN STAGE</b></td><td><b>A</b></td><td><b>B</b></td><td><b>LAKE</b></td></tr>
-                <tr><td><b>C</b></td><td><b>INFORMATION POINT</b><br>(you are here)</td><td><b>D</b></td><td><b>E</b></td></tr>
-                <tr><td><b>F</b></td><td><b>G</b></td><td><b>MAIN ENTRANCE</b></td><td><b>H</b></td></tr>
-              </table>`,
+            instr: `Label the map below.<br>Write the correct letter, <b>A–H</b>, next to Questions 15–20.`,
+            figure: `<svg viewBox="0 0 640 460" role="img" aria-label="Site map of Greenhill Valley Music Festival: main stage, lake, information point, footpaths, service track, fence, main entrance and coach park, with locations A to H">
+              <text class="fig-title" x="280" y="28" text-anchor="middle">Greenhill Valley Music Festival – Site Map</text>
+              <path class="green" d="M352 374 C280 378 160 377 50 370 C38 300 34 200 40 122 C43 80 54 56 92 50 C200 43 380 43 480 49 C514 53 528 80 526 130 C524 220 528 300 520 368 C496 372 470 374 440 374"/>
+              <path class="thin" d="M352 374 C280 378 160 377 50 370 C38 300 34 200 40 122 C43 80 54 56 92 50 C200 43 380 43 480 49 C514 53 528 80 526 130 C524 220 528 300 520 368 C496 372 470 374 440 374"/>
+              <path class="thin" d="M388 374 H420"/>
+              <rect class="solid" x="347" y="368" width="5" height="12"/><rect class="solid" x="388" y="368" width="5" height="12"/>
+              <path class="road" d="M6 400 C120 392 240 394 330 400 C420 406 500 398 560 392 C590 389 615 391 634 394"/>
+              <path class="road" d="M430 403 C430 380 438 340 440 300 C442 255 432 205 426 168 C423 150 416 140 402 134"/>
+              <path class="road" d="M512 397 V410"/>
+              <rect class="area" x="470" y="410" width="84" height="30"/>
+              <text x="512" y="430" text-anchor="middle">Coach park</text>
+              <g>
+                <circle class="tree" cx="396" cy="72" r="6"/><circle class="tree" cx="384" cy="58" r="6"/>
+                <circle class="tree" cx="56" cy="180" r="7"/><circle class="tree" cx="70" cy="166" r="6"/>
+                <circle class="tree" cx="58" cy="240" r="7"/><circle class="tree" cx="74" cy="258" r="7"/><circle class="tree" cx="56" cy="288" r="7"/>
+                <circle class="tree" cx="200" cy="350" r="7"/><circle class="tree" cx="216" cy="338" r="6"/>
+                <circle class="tree" cx="468" cy="262" r="7"/><circle class="tree" cx="488" cy="276" r="7"/><circle class="tree" cx="470" cy="292" r="6"/>
+              </g>
+              <path class="area" d="M68 64 H206 C211 64 214 67 214 72 V130 C186 154 92 154 60 130 V72 C60 67 63 64 68 64 Z"/>
+              <text x="137" y="104" text-anchor="middle">MAIN STAGE</text>
+              <path class="shore" d="M432 66 C468 58 506 68 510 92 C514 116 498 140 468 141 C446 142 428 136 418 120 C408 104 412 72 432 66 Z"/>
+              <text x="462" y="106" text-anchor="middle">LAKE</text>
+              <path class="path" d="M214 128 C250 124 300 136 340 128 C370 122 392 130 416 126"/>
+              <path class="path" d="M110 150 C108 165 112 180 110 194"/>
+              <path class="path" d="M270 208 C272 182 268 156 270 130"/>
+              <path class="path" d="M278 215 C305 213 330 217 356 215"/>
+              <path class="path" d="M382 215 C420 212 452 206 486 200"/>
+              <path class="path" d="M265 222 C250 260 180 300 96 340"/>
+              <path class="path" d="M370 372 C368 320 290 290 273 224"/>
+              <path class="path" d="M352 366 C340 360 332 352 326 345"/>
+              <path class="path" d="M388 368 C420 364 452 354 476 345"/>
+              <circle class="solid" cx="270" cy="215" r="7"/>
+              <text class="halo" x="258" y="210" text-anchor="end">Information point</text>
+              <text class="halo" x="258" y="224" text-anchor="end">(you are here)</text>
+              <g class="lbl" text-anchor="middle">
+                <rect class="box" x="258" y="92" width="24" height="24"/><text class="lbl" x="270" y="110">A</text>
+                <rect class="box" x="353" y="92" width="24" height="24"/><text class="lbl" x="365" y="110">B</text>
+                <rect class="box" x="98" y="196" width="24" height="24"/><text class="lbl" x="110" y="214">C</text>
+                <rect class="box" x="358" y="203" width="24" height="24"/><text class="lbl" x="370" y="221">D</text>
+                <rect class="box" x="488" y="188" width="24" height="24"/><text class="lbl" x="500" y="206">E</text>
+                <rect class="box" x="70" y="330" width="24" height="24"/><text class="lbl" x="82" y="348">F</text>
+                <rect class="box" x="300" y="330" width="24" height="24"/><text class="lbl" x="312" y="348">G</text>
+                <rect class="box" x="478" y="330" width="24" height="24"/><text class="lbl" x="490" y="348">H</text>
+              </g>
+              <path class="solid" d="M370 378 l-7 12 h14 z"/>
+              <text x="370" y="426" text-anchor="middle">Main entrance</text>
+              <g class="compass" transform="translate(588 62)">
+                <line class="thin" x1="0" y1="-18" x2="0" y2="18"/><line class="thin" x1="-18" y1="0" x2="18" y2="0"/>
+                <path class="solid" d="M0 -22 l-5 10 h10 z"/><path class="solid" d="M0 22 l-5 -10 h10 z"/>
+                <path class="solid" d="M22 0 l-10 -5 v10 z"/><path class="solid" d="M-22 0 l10 -5 v10 z"/>
+                <text x="0" y="-27" text-anchor="middle">N</text><text x="0" y="37" text-anchor="middle">S</text>
+                <text x="33" y="4" text-anchor="middle">E</text><text x="-33" y="4" text-anchor="middle">W</text>
+              </g>
+              <g>
+                <rect class="thin" x="528" y="124" width="106" height="140"/>
+                <text class="lbl" x="538" y="143">Key</text>
+                <line class="road" x1="538" y1="166" x2="562" y2="166"/><text x="568" y="163">Road /</text><text x="568" y="177">track</text>
+                <line class="path" x1="538" y1="198" x2="562" y2="198"/><text x="568" y="202">Footpath</text>
+                <line class="thin" x1="538" y1="222" x2="562" y2="222"/><text x="568" y="226">Fence</text>
+                <circle class="tree" cx="543" cy="248" r="6"/><circle class="tree" cx="556" cy="245" r="6"/><text x="568" y="252">Trees</text>
+              </g>
+            </svg>`,
             boxTitle: 'Map locations',
             options: [
               { k: 'A', t: 'A' }, { k: 'B', t: 'B' }, { k: 'C', t: 'C' }, { k: 'D', t: 'D' },

@@ -104,6 +104,40 @@ Listening biasanya A–C, Reading A–D.
 `answer` harus salah satu `options[].k`. Sediakan opsi pengecoh (lebih banyak opsi daripada soal) kecuali
 untuk "matching information" yang boleh memakai huruf paragraf A–G.
 
+Tampilan: jika semua opsi hanya huruf (`{ k: 'A', t: 'A' }`, untuk label peta/denah), tiap soal tampil sebagai
+daftar radio A–H dalam dua kolom. Jika opsi berisi teks, defaultnya kotak daftar opsi + dropdown. `display: 'radio'`
+memaksa daftar radio berikut teks opsinya (gaya "26 forming questions: A – get permission …").
+
+### Gambar (`figure`) — peta, denah, diagram
+
+Grup mana pun boleh punya `figure`: string `<svg>` inline yang tampil di bawah `instr`.
+
+```js
+{ type: 'match', from: 15, to: 20, instr: 'Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 15–20.',
+  figure: `<svg viewBox="0 0 600 450" role="img" aria-label="Plan of ...">
+    <text class="fig-title" x="300" y="28" text-anchor="middle">Judul</text>
+    <rect class="box" x="113" y="73" width="24" height="24"/><text class="lbl" x="125" y="90" text-anchor="middle">A</text>
+  </svg>`, ... }
+```
+
+Jangan menulis warna sendiri. Pakai kelas berikut supaya gambar ikut mode kontras (putih di atas hitam,
+kuning di atas hitam):
+
+- `fig-title`: judul.
+- `lbl`: huruf tebal.
+- `box`: kotak huruf 24×24 atau garis tepi.
+- `line`: jalan atau dinding tebal.
+- `thin`: garis tipis.
+- `path`: jalan setapak putus-putus.
+- `route`: rute kapal atau bus.
+- `area`: bangunan atau lapangan (abu-abu).
+- `water`: air.
+- `green`: taman.
+- `solid`: panah atau penanda.
+- `halo`: teks yang melintasi garis.
+
+Contoh lengkap: Listening Part 2 di `test-03.js`. Jangan menulis nama tempat yang ditanyakan di gambar.
+
 ### `multi` — pilih DUA (atau TIGA) huruf
 
 ```js

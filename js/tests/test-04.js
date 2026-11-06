@@ -141,37 +141,75 @@
           },
           {
             type: 'match', from: 16, to: 20,
-            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 16–20.
-              <div class="plan" style="max-width:380px;margin:10px 0">
-                <svg viewBox="0 0 360 310" role="img" aria-label="Plan of Ferris Lane Recycling Centre" style="width:100%;height:auto;font-family:inherit">
-                  <text x="180" y="14" text-anchor="middle" font-size="12" font-weight="bold" fill="currentColor">Ferris Lane Recycling Centre</text>
-                  <rect x="10" y="20" width="340" height="252" fill="none" stroke="currentColor" stroke-width="2"/>
-                  <rect x="40" y="72" width="280" height="18" fill="#8884"/>
-                  <rect x="165" y="90" width="30" height="185" fill="#8884"/>
-                  <rect x="140" y="98" width="80" height="50" fill="#8884"/>
-                  <rect x="20" y="26" width="85" height="40" fill="none" stroke="currentColor"/>
-                  <text x="62" y="51" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">H</text>
-                  <rect x="138" y="26" width="84" height="40" fill="none" stroke="currentColor"/>
-                  <text x="180" y="51" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">E</text>
-                  <rect x="255" y="26" width="85" height="40" fill="none" stroke="currentColor"/>
-                  <text x="297" y="51" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">C</text>
-                  <rect x="152" y="106" width="56" height="34" fill="none" stroke="currentColor"/>
-                  <text x="180" y="128" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">G</text>
-                  <rect x="40" y="155" width="95" height="45" fill="none" stroke="currentColor"/>
-                  <text x="87" y="182" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">D</text>
-                  <rect x="225" y="155" width="95" height="45" fill="none" stroke="currentColor"/>
-                  <text x="272" y="182" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">B</text>
-                  <rect x="40" y="215" width="95" height="45" fill="none" stroke="currentColor"/>
-                  <text x="87" y="242" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">F</text>
-                  <rect x="225" y="215" width="95" height="45" fill="none" stroke="currentColor"/>
-                  <text x="272" y="242" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">A</text>
-                  <text x="180" y="266" text-anchor="middle" font-size="9" fill="currentColor">ENTRANCE</text>
-                  <path d="M180 300 L180 282" stroke="currentColor" stroke-width="1.5" marker-end="url(#p4arr)"/>
-                  <defs><marker id="p4arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
-                  <text x="60" y="296" font-size="11" fill="currentColor">FERRIS LANE</text>
-                  <line x1="10" y1="285" x2="350" y2="285" stroke="currentColor" stroke-dasharray="6 4"/>
-                </svg>
-              </div>`,
+            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 16–20.`,
+            figure: `<svg viewBox="0 0 640 460" role="img" aria-label="Plan of Ferris Lane Recycling Centre with locations A to H">
+              <text class="fig-title" x="290" y="22" text-anchor="middle">Ferris Lane Recycling Centre</text>
+              <path class="thin" d="M266 392 C200 397, 120 394, 52 386 C42 300, 44 170, 48 44 C150 34, 380 30, 522 40 C532 150, 526 290, 528 386 C450 395, 372 397, 314 392"/>
+              <rect class="solid" x="261" y="387" width="6" height="9"/><rect class="solid" x="313" y="387" width="6" height="9"/>
+              <g>
+                <circle class="tree" cx="74" cy="140" r="7"/><circle class="tree" cx="98" cy="132" r="7"/><circle class="tree" cx="124" cy="140" r="7"/>
+                <circle class="tree" cx="158" cy="134" r="7"/><circle class="tree" cx="86" cy="164" r="7"/><circle class="tree" cx="114" cy="162" r="7"/>
+                <circle class="tree" cx="146" cy="158" r="7"/><circle class="tree" cx="72" cy="198" r="7"/><circle class="tree" cx="96" cy="214" r="7"/>
+                <circle class="tree" cx="76" cy="238" r="7"/><circle class="tree" cx="122" cy="196" r="7"/>
+                <circle class="tree" cx="420" cy="136" r="7"/><circle class="tree" cx="446" cy="130" r="7"/><circle class="tree" cx="474" cy="138" r="7"/>
+                <circle class="tree" cx="500" cy="132" r="7"/><circle class="tree" cx="432" cy="162" r="7"/><circle class="tree" cx="462" cy="162" r="7"/>
+                <circle class="tree" cx="494" cy="170" r="7"/><circle class="tree" cx="502" cy="212" r="7"/><circle class="tree" cx="476" cy="232" r="7"/>
+                <circle class="tree" cx="444" cy="226" r="7"/>
+                <circle class="tree" cx="70" cy="344" r="7"/><circle class="tree" cx="92" cy="362" r="7"/><circle class="tree" cx="114" cy="346" r="7"/>
+                <circle class="tree" cx="72" cy="370" r="6"/>
+                <circle class="tree" cx="422" cy="352" r="7"/><circle class="tree" cx="446" cy="364" r="7"/><circle class="tree" cx="468" cy="348" r="7"/>
+                <circle class="tree" cx="492" cy="362" r="7"/><circle class="tree" cx="510" cy="344" r="6"/>
+              </g>
+              <path class="green" d="M74 268 C110 256, 200 254, 240 262 C248 280, 246 304, 238 318 C190 326, 120 324, 78 316 C66 300, 68 282, 74 268 Z"/>
+              <rect class="thin" x="324" y="262" width="180" height="62" rx="10"/>
+              <path class="area" d="M336 272 h40 l-5 16 h-30 z"/><path class="area" d="M336 298 h40 l-5 16 h-30 z"/>
+              <path class="area" d="M452 272 h40 l-5 16 h-30 z"/><path class="area" d="M452 298 h40 l-5 16 h-30 z"/>
+              <path class="green" d="M232 180 C230 150, 262 134, 294 134 C328 134, 354 150, 352 180 C350 208, 324 222, 292 222 C258 222, 234 208, 232 180 Z"/>
+              <circle class="tree" cx="258" cy="150" r="5"/><circle class="tree" cx="326" cy="150" r="5"/>
+              <circle class="tree" cx="262" cy="207" r="5"/><circle class="tree" cx="322" cy="207" r="5"/>
+              <rect class="area" x="262" y="162" width="60" height="32" rx="3"/>
+              <rect class="area" x="68" y="52" width="84" height="38" rx="3"/>
+              <rect class="area" x="250" y="50" width="84" height="40" rx="3"/>
+              <rect class="area" x="422" y="52" width="84" height="38" rx="3"/>
+              <rect class="area" x="318" y="334" width="82" height="40" rx="3"/>
+              <rect class="thin" x="150" y="334" width="112" height="46" rx="4"/>
+              <line class="thin" x1="200" y1="334" x2="200" y2="347"/><line class="thin" x1="214" y1="334" x2="214" y2="347"/>
+              <line class="thin" x1="228" y1="334" x2="228" y2="347"/><line class="thin" x1="242" y1="334" x2="242" y2="347"/>
+              <rect class="thin" x="222" y="356" width="16" height="16"/><text x="230" y="369" text-anchor="middle">P</text>
+              <path class="road" d="M10 428 C140 416, 220 424, 290 424 C380 424, 500 412, 630 420"/>
+              <path class="road" d="M290 424 V392 C291 360, 286 320, 288 290 C289 270, 292 256, 292 244"/>
+              <path class="road" d="M292 244 C255 242, 208 226, 206 186 C204 146, 240 114, 292 112"/>
+              <path class="road" d="M292 244 C329 242, 376 226, 378 186 C380 146, 344 114, 292 112"/>
+              <path class="road" d="M78 110 C140 102, 220 116, 292 112 C364 108, 440 98, 502 108"/>
+              <path class="road" d="M110 107 V90 M292 112 V90 M464 104 V90 M289 357 H262"/>
+              <path class="path" d="M250 334 C262 314, 268 292, 264 270 C260 252, 236 240, 236 222 C236 204, 248 192, 262 188"/>
+              <rect class="box" x="347" y="342" width="24" height="24"/><text class="lbl" x="359" y="360" text-anchor="middle">A</text>
+              <rect class="box" x="402" y="281" width="24" height="24"/><text class="lbl" x="414" y="299" text-anchor="middle">B</text>
+              <rect class="box" x="452" y="59" width="24" height="24"/><text class="lbl" x="464" y="77" text-anchor="middle">C</text>
+              <rect class="box" x="150" y="278" width="24" height="24"/><text class="lbl" x="162" y="296" text-anchor="middle">D</text>
+              <rect class="box" x="280" y="58" width="24" height="24"/><text class="lbl" x="292" y="76" text-anchor="middle">E</text>
+              <rect class="box" x="162" y="345" width="24" height="24"/><text class="lbl" x="174" y="363" text-anchor="middle">F</text>
+              <rect class="box" x="280" y="166" width="24" height="24"/><text class="lbl" x="292" y="184" text-anchor="middle">G</text>
+              <rect class="box" x="98" y="59" width="24" height="24"/><text class="lbl" x="110" y="77" text-anchor="middle">H</text>
+              <path class="solid" d="M290 398 l-7 13 h14 z"/>
+              <text class="halo" x="304" y="410">Entrance</text>
+              <text x="130" y="448" text-anchor="middle">FERRIS LANE</text>
+              <g class="compass" transform="translate(588 78)">
+                <line class="thin" x1="0" y1="-18" x2="0" y2="18"/><line class="thin" x1="-18" y1="0" x2="18" y2="0"/>
+                <path class="solid" d="M0 -22 l-5 10 h10 z"/><path class="solid" d="M0 22 l-5 -10 h10 z"/>
+                <path class="solid" d="M22 0 l-10 -5 v10 z"/><path class="solid" d="M-22 0 l10 -5 v10 z"/>
+                <text x="0" y="-27" text-anchor="middle">N</text><text x="0" y="37" text-anchor="middle">S</text>
+                <text x="33" y="4" text-anchor="middle">E</text><text x="-33" y="4" text-anchor="middle">W</text>
+              </g>
+              <rect class="thin" x="536" y="214" width="100" height="178" rx="4"/>
+              <text class="lbl" x="546" y="234">Key</text>
+              <line class="road" x1="546" y1="254" x2="572" y2="254"/><text x="580" y="258">Road</text>
+              <line class="path" x1="546" y1="278" x2="572" y2="278"/><text x="580" y="282">Footpath</text>
+              <line class="thin" x1="546" y1="302" x2="572" y2="302"/><text x="580" y="306">Fence</text>
+              <rect class="area" x="548" y="319" width="22" height="14" rx="2"/><text x="580" y="330">Building</text>
+              <rect class="thin" x="551" y="342" width="16" height="16"/><text x="559" y="355" text-anchor="middle">P</text><text x="580" y="355">Car park</text>
+              <circle class="tree" cx="553" cy="374" r="5"/><circle class="tree" cx="565" cy="374" r="5"/><text x="580" y="378">Trees</text>
+            </svg>`,
             boxTitle: 'Plan labels',
             options: [
               { k: 'A', t: 'A' }, { k: 'B', t: 'B' }, { k: 'C', t: 'C' }, { k: 'D', t: 'D' },

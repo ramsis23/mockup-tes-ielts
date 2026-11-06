@@ -122,15 +122,69 @@
           },
           {
             type: 'match', from: 15, to: 20,
-            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 15–20.
-              <table class="form-table" style="text-align:center;max-width:420px;margin-top:8px">
-                <tr><td colspan="3"><b>Hollin Park</b> (North ↑)</td></tr>
-                <tr><td><b>A</b></td><td>Boathouse</td><td><b>B</b></td></tr>
-                <tr><td><b>C</b></td><td>LAKE</td><td><b>D</b></td></tr>
-                <tr><td><b>E</b></td><td>Bandstand</td><td><b>F</b></td></tr>
-                <tr><td><b>G</b></td><td>Main gate</td><td><b>H</b></td></tr>
-                <tr><td colspan="3">Park Road</td></tr>
-              </table>`,
+            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 15–20.`,
+            figure: `<svg viewBox="0 0 640 460" role="img" aria-label="Map of Hollin Park on the day of the fun run: lake, boathouse, bandstand, footpaths, fun run route, car park, Park Road and the main gate, with locations A to H">
+              <text class="fig-title" x="275" y="28" text-anchor="middle">Hollin Park</text>
+              <path class="green" d="M288 364 C360 367 440 363 502 356 C514 300 520 200 513 122 C509 82 500 58 470 50 C380 41 200 43 82 50 C52 54 39 80 37 130 C34 220 40 300 52 356 C120 364 200 367 262 364"/>
+              <path class="thin" d="M288 364 C360 367 440 363 502 356 C514 300 520 200 513 122 C509 82 500 58 470 50 C380 41 200 43 82 50 C52 54 39 80 37 130 C34 220 40 300 52 356 C120 364 200 367 262 364"/>
+              <rect class="solid" x="257" y="357" width="5" height="13"/><rect class="solid" x="288" y="357" width="5" height="13"/>
+              <path class="road" d="M6 394 C120 384 220 386 300 392 C390 399 470 392 530 386 C570 382 605 386 634 390"/>
+              <path class="road" d="M456 393 C457 376 452 362 456 346"/>
+              <rect class="area" x="421" y="302" width="70" height="44"/>
+              <text x="456" y="329" text-anchor="middle">Car park</text>
+              <rect class="solid" x="318" y="400" width="12" height="7"/>
+              <text x="120" y="414" text-anchor="middle">PARK ROAD</text>
+              <text x="430" y="418" text-anchor="middle">PARK ROAD</text>
+              <g>
+                <circle class="tree" cx="62" cy="96" r="7"/><circle class="tree" cx="78" cy="78" r="7"/><circle class="tree" cx="92" cy="104" r="7"/>
+                <circle class="tree" cx="96" cy="130" r="6"/>
+                <circle class="tree" cx="60" cy="232" r="7"/><circle class="tree" cx="76" cy="248" r="7"/><circle class="tree" cx="58" cy="266" r="7"/>
+                <circle class="tree" cx="82" cy="290" r="7"/><circle class="tree" cx="62" cy="312" r="7"/><circle class="tree" cx="96" cy="330" r="7"/>
+                <circle class="tree" cx="160" cy="340" r="7"/><circle class="tree" cx="176" cy="326" r="6"/>
+                <circle class="tree" cx="470" cy="78" r="7"/><circle class="tree" cx="486" cy="100" r="7"/><circle class="tree" cx="462" cy="114" r="6"/>
+                <circle class="tree" cx="470" cy="215" r="7"/><circle class="tree" cx="488" cy="232" r="7"/><circle class="tree" cx="472" cy="250" r="7"/><circle class="tree" cx="492" cy="266" r="6"/>
+                <circle class="tree" cx="380" cy="340" r="7"/><circle class="tree" cx="396" cy="326" r="6"/>
+              </g>
+              <path class="shore" d="M275 108 C300 104 322 112 338 110 C356 108 362 128 356 145 C350 162 362 178 352 196 C344 212 352 226 330 230 C310 234 300 220 285 228 C266 238 244 236 226 226 C206 216 212 200 200 190 C188 178 198 160 196 146 C194 128 210 118 230 116 C248 114 258 110 275 108 Z"/>
+              <text x="275" y="172" text-anchor="middle">LAKE</text>
+              <rect class="area" x="268" y="86" width="14" height="22"/>
+              <rect class="area" x="236" y="60" width="78" height="28"/>
+              <text x="275" y="79" text-anchor="middle">Boathouse</text>
+              <path class="route" d="M275 94 C330 90 378 108 380 150 C382 180 372 200 378 220 C384 246 330 252 290 248 C255 246 230 256 200 244 C172 232 176 200 172 170 C168 140 180 110 215 100 C235 95 255 94 275 94 Z"/>
+              <path class="path" d="M275 364 V313"/>
+              <path class="path" d="M275 280 C276 268 274 258 276 249"/>
+              <path class="path" d="M379 228 C405 255 430 272 446 302"/>
+              <circle class="area" cx="275" cy="296" r="16"/>
+              <text class="halo" x="275" y="271" text-anchor="middle">Bandstand</text>
+              <g class="lbl" text-anchor="middle">
+                <rect class="box" x="134" y="62" width="24" height="24"/><text class="lbl" x="146" y="80">A</text>
+                <rect class="box" x="392" y="62" width="24" height="24"/><text class="lbl" x="404" y="80">B</text>
+                <rect class="box" x="118" y="162" width="24" height="24"/><text class="lbl" x="130" y="180">C</text>
+                <rect class="box" x="404" y="162" width="24" height="24"/><text class="lbl" x="416" y="180">D</text>
+                <rect class="box" x="215" y="284" width="24" height="24"/><text class="lbl" x="227" y="302">E</text>
+                <rect class="box" x="311" y="284" width="24" height="24"/><text class="lbl" x="323" y="302">F</text>
+                <rect class="box" x="213" y="330" width="24" height="24"/><text class="lbl" x="225" y="348">G</text>
+                <rect class="box" x="313" y="330" width="24" height="24"/><text class="lbl" x="325" y="348">H</text>
+              </g>
+              <path class="solid" d="M275 368 l-7 12 h14 z"/>
+              <text x="275" y="418" text-anchor="middle">Main gate</text>
+              <g class="compass" transform="translate(588 62)">
+                <line class="thin" x1="0" y1="-18" x2="0" y2="18"/><line class="thin" x1="-18" y1="0" x2="18" y2="0"/>
+                <path class="solid" d="M0 -22 l-5 10 h10 z"/><path class="solid" d="M0 22 l-5 -10 h10 z"/>
+                <path class="solid" d="M22 0 l-10 -5 v10 z"/><path class="solid" d="M-22 0 l10 -5 v10 z"/>
+                <text x="0" y="-27" text-anchor="middle">N</text><text x="0" y="37" text-anchor="middle">S</text>
+                <text x="33" y="4" text-anchor="middle">E</text><text x="-33" y="4" text-anchor="middle">W</text>
+              </g>
+              <g>
+                <rect class="thin" x="528" y="124" width="106" height="164"/>
+                <text class="lbl" x="538" y="143">Key</text>
+                <line class="road" x1="538" y1="162" x2="562" y2="162"/><text x="568" y="166">Road</text>
+                <line class="path" x1="538" y1="186" x2="562" y2="186"/><text x="568" y="190">Footpath</text>
+                <line class="route" x1="538" y1="212" x2="562" y2="212"/><text x="568" y="209">Fun run</text><text x="568" y="223">route</text>
+                <circle class="tree" cx="543" cy="246" r="6"/><circle class="tree" cx="556" cy="243" r="6"/><text x="568" y="250">Trees</text>
+                <rect class="solid" x="544" y="266" width="12" height="7"/><text x="568" y="274">Bus stop</text>
+              </g>
+            </svg>`,
             boxTitle: 'Locations on the plan',
             options: [
               { k: 'A', t: 'A' }, { k: 'B', t: 'B' }, { k: 'C', t: 'C' }, { k: 'D', t: 'D' },

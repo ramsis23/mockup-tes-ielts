@@ -122,15 +122,37 @@
           },
           {
             type: 'match', from: 15, to: 20,
-            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 15–20.
-              <table class="form-table" style="text-align:center;margin:10px 0;max-width:480px">
-                <tr><td><b>A</b></td><td colspan="3">NORTH STAND</td><td><b>B</b></td></tr>
-                <tr><td>West Stand<br><b>C</b></td><td colspan="3" rowspan="2" style="background:rgba(60,160,80,.15)">PITCH</td><td>East Stand<br><b>D</b></td></tr>
-                <tr><td>West Stand<br><b>E</b></td><td>East Stand<br><b>F</b></td></tr>
-                <tr><td><b>G</b></td><td colspan="3">SOUTH STAND</td><td><b>H</b></td></tr>
-                <tr><td colspan="5">&#9650; Main entrance (you are here)</td></tr>
-              </table>
-              <b>Castleford Park Stadium</b>`,
+            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 15–20.`,
+            figure: `<svg viewBox="0 0 660 450" role="img" aria-label="Plan of Castleford Park Stadium with locations A to H">
+              <text class="fig-title" x="300" y="28" text-anchor="middle">Castleford Park Stadium</text>
+              <rect class="box" x="90" y="60" width="420" height="320"/>
+              <rect class="area" x="160" y="110" width="280" height="220"/>
+              <line class="thin" x1="300" y1="110" x2="300" y2="330"/>
+              <circle class="thin" cx="300" cy="220" r="34"/>
+              <rect class="thin" x="160" y="175" width="34" height="90"/><rect class="thin" x="406" y="175" width="34" height="90"/>
+              <text class="halo" x="300" y="300" text-anchor="middle">PITCH</text>
+              <line class="thin" x1="160" y1="60" x2="160" y2="380"/><line class="thin" x1="440" y1="60" x2="440" y2="380"/>
+              <line class="thin" x1="90" y1="110" x2="510" y2="110"/><line class="thin" x1="90" y1="330" x2="510" y2="330"/>
+              <line class="thin" x1="90" y1="220" x2="160" y2="220"/><line class="thin" x1="440" y1="220" x2="510" y2="220"/>
+              <text x="300" y="90" text-anchor="middle">NORTH STAND</text>
+              <text x="300" y="360" text-anchor="middle">SOUTH STAND</text>
+              <text class="halo" x="125" y="226" text-anchor="middle" transform="rotate(-90 125 222)">WEST STAND</text>
+              <text class="halo" x="475" y="226" text-anchor="middle" transform="rotate(90 475 222)">EAST STAND</text>
+              <g class="lbl" text-anchor="middle">
+                <rect class="box" x="113" y="73" width="24" height="24"/><text class="lbl" x="125" y="90">A</text>
+                <rect class="box" x="463" y="73" width="24" height="24"/><text class="lbl" x="475" y="90">B</text>
+                <rect class="box" x="113" y="128" width="24" height="24"/><text class="lbl" x="125" y="145">C</text>
+                <rect class="box" x="463" y="128" width="24" height="24"/><text class="lbl" x="475" y="145">D</text>
+                <rect class="box" x="113" y="290" width="24" height="24"/><text class="lbl" x="125" y="307">E</text>
+                <rect class="box" x="463" y="290" width="24" height="24"/><text class="lbl" x="475" y="307">F</text>
+                <rect class="box" x="113" y="343" width="24" height="24"/><text class="lbl" x="125" y="360">G</text>
+                <rect class="box" x="463" y="343" width="24" height="24"/><text class="lbl" x="475" y="360">H</text>
+              </g>
+              <rect class="solid" x="285" y="376" width="30" height="8"/>
+              <path class="solid" d="M300 392 l-9 16 h18 z"/>
+              <text x="300" y="428" text-anchor="middle">Main entrance (you are here)</text>
+              <g class="compass" transform="translate(615 70)"><line class="thin" x1="0" y1="-18" x2="0" y2="18"/><line class="thin" x1="-18" y1="0" x2="18" y2="0"/><path class="solid" d="M0 -22 l-5 10 h10 z"/><path class="solid" d="M0 22 l-5 -10 h10 z"/><path class="solid" d="M22 0 l-10 -5 v10 z"/><path class="solid" d="M-22 0 l10 -5 v10 z"/><text x="0" y="-27" text-anchor="middle">N</text><text x="0" y="37" text-anchor="middle">S</text><text x="33" y="4" text-anchor="middle">E</text><text x="-33" y="4" text-anchor="middle">W</text></g>
+            </svg>`,
             boxTitle: 'Locations on the plan',
             options: [
               { k: 'A', t: 'A' }, { k: 'B', t: 'B' }, { k: 'C', t: 'C' }, { k: 'D', t: 'D' },

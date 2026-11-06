@@ -93,24 +93,49 @@
         groups: [
           {
             type: 'match', from: 11, to: 15,
-            instr: `Label the plan below.<br>Write the correct letter, <b>A–F</b>, next to Questions 11–15.
-              <div class="form-box" style="margin-top:12px">
-                <h4>Westmoor Museum – Ground Floor</h4>
-                <table class="form-table" style="text-align:center;border:1px solid currentColor">
-                  <tr><td style="border:1px solid currentColor;width:25%"><b>A</b></td><td style="border:1px solid currentColor">Egyptian Gallery</td><td style="border:1px solid currentColor"><b>B</b></td><td style="border:1px solid currentColor">Staircase</td></tr>
-                  <tr><td style="border:1px solid currentColor">Café</td><td style="border:1px solid currentColor">Main Hall</td><td style="border:1px solid currentColor"><b>C</b></td><td style="border:1px solid currentColor"><b>D</b></td></tr>
-                  <tr><td style="border:1px solid currentColor"><b>E</b></td><td style="border:1px solid currentColor">Reception</td><td style="border:1px solid currentColor"><b>F</b></td><td style="border:1px solid currentColor">Gift Shop</td></tr>
-                  <tr><td></td><td>▲ Main Entrance</td><td></td><td></td></tr>
-                </table>
-              </div>`,
+            instr: `Label the plan below.<br>Write the correct letter, <b>A–F</b>, next to Questions 11–15.`,
+            figure: `<svg viewBox="0 0 660 430" role="img" aria-label="Plan of the ground floor of Westmoor Museum with locations A to F">
+              <text class="fig-title" x="300" y="28" text-anchor="middle">Westmoor Museum – Ground Floor</text>
+              <path class="line" d="M235 360 H60 V50 H540 V360 H285"/>
+              <line class="thin" x1="170" y1="50" x2="170" y2="360"/>
+              <line class="thin" x1="350" y1="50" x2="350" y2="360"/>
+              <line class="thin" x1="450" y1="50" x2="450" y2="360"/>
+              <line class="thin" x1="60" y1="140" x2="230" y2="140"/><line class="thin" x1="290" y1="140" x2="540" y2="140"/>
+              <line class="thin" x1="60" y1="260" x2="230" y2="260"/><line class="thin" x1="290" y1="260" x2="540" y2="260"/>
+              <text x="260" y="100" text-anchor="middle">Egyptian Gallery</text>
+              <text x="260" y="205" text-anchor="middle">MAIN HALL</text>
+              <text x="115" y="205" text-anchor="middle">Café</text>
+              <text x="260" y="292" text-anchor="middle">Reception</text>
+              <rect class="area" x="220" y="304" width="80" height="14"/>
+              <text x="495" y="315" text-anchor="middle">Gift Shop</text>
+              <g>
+                <line class="thin" x1="465" y1="62" x2="525" y2="62"/><line class="thin" x1="465" y1="70" x2="525" y2="70"/>
+                <line class="thin" x1="465" y1="78" x2="525" y2="78"/><line class="thin" x1="465" y1="86" x2="525" y2="86"/>
+                <line class="thin" x1="465" y1="94" x2="525" y2="94"/><line class="thin" x1="465" y1="102" x2="525" y2="102"/>
+                <line class="thin" x1="465" y1="110" x2="525" y2="110"/>
+                <line class="thin" x1="465" y1="62" x2="465" y2="110"/><line class="thin" x1="525" y1="62" x2="525" y2="110"/>
+              </g>
+              <text x="495" y="130" text-anchor="middle">Staircase</text>
+              <g class="lbl" text-anchor="middle">
+                <rect class="box" x="103" y="83" width="24" height="24"/><text class="lbl" x="115" y="100">A</text>
+                <rect class="box" x="388" y="83" width="24" height="24"/><text class="lbl" x="400" y="100">B</text>
+                <rect class="box" x="388" y="188" width="24" height="24"/><text class="lbl" x="400" y="205">C</text>
+                <rect class="box" x="483" y="188" width="24" height="24"/><text class="lbl" x="495" y="205">D</text>
+                <rect class="box" x="103" y="298" width="24" height="24"/><text class="lbl" x="115" y="315">E</text>
+                <rect class="box" x="388" y="298" width="24" height="24"/><text class="lbl" x="400" y="315">F</text>
+              </g>
+              <path class="solid" d="M260 370 l-9 16 h18 z"/>
+              <text x="260" y="406" text-anchor="middle">Main entrance (you are here)</text>
+              <g class="compass" transform="translate(615 80)"><line class="thin" x1="0" y1="-18" x2="0" y2="18"/><line class="thin" x1="-18" y1="0" x2="18" y2="0"/><path class="solid" d="M0 -22 l-5 10 h10 z"/><path class="solid" d="M0 22 l-5 -10 h10 z"/><path class="solid" d="M22 0 l-10 -5 v10 z"/><path class="solid" d="M-22 0 l10 -5 v10 z"/><text x="0" y="-27" text-anchor="middle">N</text><text x="0" y="37" text-anchor="middle">S</text><text x="33" y="4" text-anchor="middle">E</text><text x="-33" y="4" text-anchor="middle">W</text></g>
+            </svg>`,
             boxTitle: 'Locations on the plan',
             options: [
-              { k: 'A', t: 'Location A' },
-              { k: 'B', t: 'Location B' },
-              { k: 'C', t: 'Location C' },
-              { k: 'D', t: 'Location D' },
-              { k: 'E', t: 'Location E' },
-              { k: 'F', t: 'Location F' }
+              { k: 'A', t: 'A' },
+              { k: 'B', t: 'B' },
+              { k: 'C', t: 'C' },
+              { k: 'D', t: 'D' },
+              { k: 'E', t: 'E' },
+              { k: 'F', t: 'F' }
             ],
             questions: [
               { n: 11, text: 'Volunteers’ room', answer: 'E' },

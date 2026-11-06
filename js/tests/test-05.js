@@ -120,18 +120,74 @@ const T = {
           },
           {
             type: 'match', from: 15, to: 20,
-            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 15–20.
-              <table class="form-table" style="text-align:center;margin-top:8px">
-                <tr><th colspan="4">Kingsmere Botanic Garden (north at the top)</th></tr>
-                <tr><td><b>A</b></td><td><b>B</b></td><td>Lake</td><td><b>C</b></td></tr>
-                <tr><td><b>D</b></td><td>Fountain</td><td><b>E</b></td><td><b>F</b></td></tr>
-                <tr><td><b>G</b></td><td>Main Entrance</td><td>Visitor Centre</td><td><b>H</b></td></tr>
-              </table>`,
+            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 15–20.`,
+            figure: `<svg viewBox="0 0 640 460" role="img" aria-label="Plan of Kingsmere Botanic Garden with locations A to H">
+              <text class="fig-title" x="285" y="24" text-anchor="middle">Kingsmere Botanic Garden</text>
+              <path class="thin" d="M214 392 C150 397, 80 394, 40 384 C30 300, 32 160, 38 46 C160 34, 380 32, 530 44 C538 160, 534 300, 532 384 C420 396, 320 397, 246 392"/>
+              <rect class="solid" x="209" y="387" width="6" height="9"/><rect class="solid" x="245" y="387" width="6" height="9"/>
+              <path class="shore" d="M292 78 C312 66, 340 76, 356 70 C376 64, 398 78, 400 98 C402 116, 392 124, 398 140 C404 158, 382 172, 360 168 C340 164, 326 178, 304 172 C280 166, 262 150, 264 128 C266 112, 258 104, 266 94 C272 86, 282 82, 292 78 Z"/>
+              <text class="halo" x="330" y="128" text-anchor="middle">Lake</text>
+              <path class="green" d="M204 70 C220 62, 246 64, 254 74 C258 86, 256 98, 248 104 C232 108, 214 106, 206 98 C200 90, 200 78, 204 70 Z"/>
+              <path class="green" d="M104 84 C130 74, 170 74, 184 86 C190 100, 186 120, 172 128 C146 134, 116 132, 104 122 C96 110, 96 94, 104 84 Z"/>
+              <path class="green" d="M100 190 C130 178, 176 178, 194 188 C200 204, 198 232, 188 244 C160 252, 120 250, 102 242 C92 228, 92 204, 100 190 Z"/>
+              <path class="green" d="M458 62 C480 52, 512 54, 520 66 C526 84, 524 110, 512 122 C490 132, 466 128, 456 116 C448 100, 448 78, 458 62 Z"/>
+              <path class="green" d="M456 188 C480 178, 512 180, 520 192 C526 210, 522 234, 510 244 C486 252, 462 248, 454 236 C448 220, 448 200, 456 188 Z"/>
+              <g>
+                <circle class="tree" cx="310" cy="52" r="7"/><circle class="tree" cx="340" cy="50" r="7"/><circle class="tree" cx="370" cy="54" r="7"/>
+                <circle class="tree" cx="400" cy="62" r="6"/>
+                <circle class="tree" cx="112" cy="154" r="7"/><circle class="tree" cx="138" cy="148" r="7"/><circle class="tree" cx="164" cy="156" r="7"/>
+                <circle class="tree" cx="190" cy="148" r="7"/>
+                <circle class="tree" cx="114" cy="272" r="7"/><circle class="tree" cx="146" cy="266" r="7"/><circle class="tree" cx="178" cy="274" r="7"/>
+                <circle class="tree" cx="272" cy="268" r="7"/><circle class="tree" cx="302" cy="274" r="7"/><circle class="tree" cx="334" cy="264" r="7"/>
+                <circle class="tree" cx="366" cy="274" r="7"/><circle class="tree" cx="398" cy="250" r="6"/>
+                <circle class="tree" cx="470" cy="152" r="7"/><circle class="tree" cx="500" cy="158" r="7"/>
+                <circle class="tree" cx="468" cy="272" r="7"/><circle class="tree" cx="500" cy="268" r="7"/>
+              </g>
+              <rect class="area" x="100" y="294" width="108" height="54" rx="3"/>
+              <rect class="thin" x="284" y="184" width="70" height="12"/>
+              <rect class="area" x="276" y="196" width="86" height="38" rx="3"/>
+              <rect class="area" x="262" y="296" width="122" height="50" rx="3"/>
+              <text x="323" y="325" text-anchor="middle">Visitor Centre</text>
+              <rect class="area" x="430" y="296" width="88" height="52" rx="3"/>
+              <path class="road" d="M10 432 C120 422, 200 432, 300 430 C400 428, 520 420, 630 430"/>
+              <path class="path" d="M196 62 C150 52, 96 56, 80 84 C62 130, 66 190, 64 250 C62 300, 60 345, 84 362 C120 380, 190 378, 230 374 C280 378, 360 380, 392 374 C410 340, 410 300, 420 270 C432 236, 432 196, 428 160 C424 130, 428 100, 440 74"/>
+              <path class="path" d="M230 430 V411 M230 392 C226 340, 236 280, 230 228 M230 202 C224 160, 236 130, 230 106"/>
+              <circle class="thin" cx="230" cy="215" r="13"/><circle class="solid" cx="230" cy="215" r="4"/>
+              <text class="halo" x="230" y="252" text-anchor="middle">Fountain</text>
+              <text class="halo" transform="translate(68 290) rotate(-90)" text-anchor="middle">Western path</text>
+              <text class="halo" transform="translate(435 216) rotate(-90)" text-anchor="middle">Eastern path</text>
+              <rect class="box" x="130" y="92" width="24" height="24"/><text class="lbl" x="142" y="110" text-anchor="middle">A</text>
+              <rect class="box" x="218" y="72" width="24" height="24"/><text class="lbl" x="230" y="90" text-anchor="middle">B</text>
+              <rect class="box" x="478" y="79" width="24" height="24"/><text class="lbl" x="490" y="97" text-anchor="middle">C</text>
+              <rect class="box" x="133" y="202" width="24" height="24"/><text class="lbl" x="145" y="220" text-anchor="middle">D</text>
+              <rect class="box" x="307" y="203" width="24" height="24"/><text class="lbl" x="319" y="221" text-anchor="middle">E</text>
+              <rect class="box" x="474" y="201" width="24" height="24"/><text class="lbl" x="486" y="219" text-anchor="middle">F</text>
+              <rect class="box" x="142" y="309" width="24" height="24"/><text class="lbl" x="154" y="327" text-anchor="middle">G</text>
+              <rect class="box" x="462" y="310" width="24" height="24"/><text class="lbl" x="474" y="328" text-anchor="middle">H</text>
+              <path class="solid" d="M230 396 l-8 15 h16 z"/>
+              <text class="halo" x="250" y="414">Main entrance (you are here)</text>
+              <g class="compass" transform="translate(590 78)">
+                <line class="thin" x1="0" y1="-18" x2="0" y2="18"/><line class="thin" x1="-18" y1="0" x2="18" y2="0"/>
+                <path class="solid" d="M0 -22 l-5 10 h10 z"/><path class="solid" d="M0 22 l-5 -10 h10 z"/>
+                <path class="solid" d="M22 0 l-10 -5 v10 z"/><path class="solid" d="M-22 0 l10 -5 v10 z"/>
+                <text x="0" y="-27" text-anchor="middle">N</text><text x="0" y="37" text-anchor="middle">S</text>
+                <text x="33" y="4" text-anchor="middle">E</text><text x="-33" y="4" text-anchor="middle">W</text>
+              </g>
+              <rect class="thin" x="542" y="196" width="96" height="186" rx="4"/>
+              <text class="lbl" x="550" y="216">Key</text>
+              <line class="road" x1="550" y1="234" x2="572" y2="234"/><text x="580" y="238">Road</text>
+              <line class="path" x1="550" y1="256" x2="572" y2="256"/><text x="580" y="260">Footpath</text>
+              <line class="thin" x1="550" y1="278" x2="572" y2="278"/><text x="580" y="282">Hedge</text>
+              <rect class="area" x="550" y="293" width="22" height="14" rx="2"/><text x="580" y="304">Building</text>
+              <path class="green" d="M552 316 C560 312, 570 313, 572 318 C574 324, 570 330, 562 330 C554 330, 549 324, 552 316 Z"/><text x="580" y="327">Garden</text>
+              <circle class="tree" cx="555" cy="345" r="5"/><circle class="tree" cx="567" cy="345" r="5"/><text x="580" y="349">Trees</text>
+              <path class="shore" d="M552 364 C558 358, 570 359, 572 365 C574 371, 566 374, 560 373 C553 372, 549 368, 552 364 Z"/><text x="580" y="371">Water</text>
+            </svg>`,
             boxTitle: 'Locations on the plan',
             options: [
-              { k: 'A', t: 'position A' }, { k: 'B', t: 'position B' }, { k: 'C', t: 'position C' },
-              { k: 'D', t: 'position D' }, { k: 'E', t: 'position E' }, { k: 'F', t: 'position F' },
-              { k: 'G', t: 'position G' }, { k: 'H', t: 'position H' }
+              { k: 'A', t: 'A' }, { k: 'B', t: 'B' }, { k: 'C', t: 'C' },
+              { k: 'D', t: 'D' }, { k: 'E', t: 'E' }, { k: 'F', t: 'F' },
+              { k: 'G', t: 'G' }, { k: 'H', t: 'H' }
             ],
             questions: [
               { n: 15, text: 'Tropical Glasshouse', answer: 'G' },

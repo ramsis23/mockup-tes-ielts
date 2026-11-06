@@ -123,35 +123,40 @@
           },
           {
             type: 'match', from: 15, to: 20,
-            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 15–20.
-              <div class="plan-box" style="margin:10px 0">
-                <p><b>St Aldwyn’s Hospital – Ground Floor</b></p>
-                <table style="border-collapse:collapse;text-align:center;width:100%;max-width:520px">
-                  <tr>
-                    <td style="border:1px solid #888;padding:10px">A</td>
-                    <td style="border:1px solid #888;padding:10px">B</td>
-                    <td style="border:1px solid #888;padding:10px">Lifts</td>
-                    <td style="border:1px solid #888;padding:10px">C</td>
-                  </tr>
-                  <tr><td colspan="4" style="border:1px solid #888;padding:8px;font-style:italic">Main corridor</td></tr>
-                  <tr>
-                    <td style="border:1px solid #888;padding:10px">D</td>
-                    <td style="border:1px solid #888;padding:10px">Reception</td>
-                    <td style="border:1px solid #888;padding:10px">E</td>
-                    <td style="border:1px solid #888;padding:10px">F</td>
-                  </tr>
-                  <tr>
-                    <td style="border:1px solid #888;padding:10px">G</td>
-                    <td colspan="2" style="border:1px solid #888;padding:10px"><b>MAIN ENTRANCE</b> ↑</td>
-                    <td style="border:1px solid #888;padding:10px">H</td>
-                  </tr>
-                </table>
-              </div>`,
+            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 15–20.`,
+            figure: `<svg viewBox="0 0 660 430" role="img" aria-label="Ground floor plan of St Aldwyn’s Hospital with locations A to H">
+              <text class="fig-title" x="300" y="30" text-anchor="middle">St Aldwyn’s Hospital – Ground Floor</text>
+              <rect class="area" x="300" y="50" width="100" height="90"/>
+              <rect class="area" x="200" y="212" width="100" height="28"/>
+              <line class="thin" x1="170" y1="50" x2="170" y2="140"/><line class="thin" x1="300" y1="50" x2="300" y2="140"/><line class="thin" x1="400" y1="50" x2="400" y2="140"/>
+              <line class="thin" x1="40" y1="140" x2="560" y2="140"/>
+              <line class="thin" x1="40" y1="190" x2="170" y2="190"/><line class="thin" x1="330" y1="190" x2="560" y2="190"/>
+              <line class="thin" x1="170" y1="190" x2="170" y2="370"/><line class="thin" x1="330" y1="190" x2="330" y2="370"/>
+              <line class="thin" x1="430" y1="190" x2="430" y2="280"/>
+              <line class="thin" x1="40" y1="280" x2="170" y2="280"/><line class="thin" x1="330" y1="280" x2="560" y2="280"/>
+              <path class="line" d="M220 370 H40 V50 H560 V370 H280"/>
+              <text class="halo" x="350" y="100" text-anchor="middle">Lifts</text>
+              <text x="300" y="170" text-anchor="middle">Main corridor</text>
+              <text x="250" y="231" text-anchor="middle">Reception</text>
+              <g class="lbl" text-anchor="middle">
+                <rect class="box" x="93" y="83" width="24" height="24"/><text class="lbl" x="105" y="100">A</text>
+                <rect class="box" x="223" y="83" width="24" height="24"/><text class="lbl" x="235" y="100">B</text>
+                <rect class="box" x="468" y="83" width="24" height="24"/><text class="lbl" x="480" y="100">C</text>
+                <rect class="box" x="93" y="223" width="24" height="24"/><text class="lbl" x="105" y="240">D</text>
+                <rect class="box" x="368" y="223" width="24" height="24"/><text class="lbl" x="380" y="240">E</text>
+                <rect class="box" x="483" y="223" width="24" height="24"/><text class="lbl" x="495" y="240">F</text>
+                <rect class="box" x="93" y="313" width="24" height="24"/><text class="lbl" x="105" y="330">G</text>
+                <rect class="box" x="433" y="313" width="24" height="24"/><text class="lbl" x="445" y="330">H</text>
+              </g>
+              <path class="solid" d="M250 380 l-9 16 h18 z"/>
+              <text x="250" y="416" text-anchor="middle">Main entrance</text>
+              <g class="compass" transform="translate(615 70)"><line class="thin" x1="0" y1="-18" x2="0" y2="18"/><line class="thin" x1="-18" y1="0" x2="18" y2="0"/><path class="solid" d="M0 -22 l-5 10 h10 z"/><path class="solid" d="M0 22 l-5 -10 h10 z"/><path class="solid" d="M22 0 l-10 -5 v10 z"/><path class="solid" d="M-22 0 l10 -5 v10 z"/><text x="0" y="-27" text-anchor="middle">N</text><text x="0" y="37" text-anchor="middle">S</text><text x="33" y="4" text-anchor="middle">E</text><text x="-33" y="4" text-anchor="middle">W</text></g>
+            </svg>`,
             boxTitle: 'Locations on the plan',
             options: [
-              { k: 'A', t: 'location A' }, { k: 'B', t: 'location B' }, { k: 'C', t: 'location C' },
-              { k: 'D', t: 'location D' }, { k: 'E', t: 'location E' }, { k: 'F', t: 'location F' },
-              { k: 'G', t: 'location G' }, { k: 'H', t: 'location H' }
+              { k: 'A', t: 'A' }, { k: 'B', t: 'B' }, { k: 'C', t: 'C' },
+              { k: 'D', t: 'D' }, { k: 'E', t: 'E' }, { k: 'F', t: 'F' },
+              { k: 'G', t: 'G' }, { k: 'H', t: 'H' }
             ],
             questions: [
               { n: 15, text: 'Volunteer office', answer: 'H' },

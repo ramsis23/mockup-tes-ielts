@@ -124,13 +124,34 @@ const T = {
           },
           {
             type: 'match', from: 14, to: 18,
-            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 14–18.
-              <table class="form-table" style="text-align:center;margin-top:8px;max-width:460px">
-                <tr><td colspan="4"><i>Ground floor of the library (back wall)</i></td></tr>
-                <tr><td>A</td><td>B</td><td>Stairs</td><td>C</td></tr>
-                <tr><td>D</td><td>Help desk</td><td>E</td><td>F</td></tr>
-                <tr><td>G</td><td>Main entrance</td><td>Café</td><td>H</td></tr>
-              </table>`,
+            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 14–18.`,
+            figure: `<svg viewBox="0 0 660 440" role="img" aria-label="Plan of the ground floor of the Hadley Library with locations A to H">
+              <text class="fig-title" x="300" y="28" text-anchor="middle">Hadley Library – Ground Floor</text>
+              <line class="thin" x1="180" y1="50" x2="180" y2="370"/><line class="thin" x1="300" y1="50" x2="300" y2="370"/><line class="thin" x1="420" y1="50" x2="420" y2="370"/>
+              <line class="thin" x1="60" y1="150" x2="180" y2="150"/><line class="thin" x1="300" y1="150" x2="540" y2="150"/>
+              <line class="thin" x1="60" y1="270" x2="180" y2="270"/><line class="thin" x1="300" y1="270" x2="540" y2="270"/>
+              <path class="line" d="M210 370 H60 V50 H540 V370 H270"/>
+              <path class="thin" d="M315 62 V122 M327 62 V122 M339 62 V122 M351 62 V122 M363 62 V122 M375 62 V122 M387 62 V122 M399 62 V122 M411 62 V122"/>
+              <text class="halo" x="360" y="140" text-anchor="middle">Stairs</text>
+              <rect class="area" x="205" y="196" width="70" height="24"/>
+              <text x="240" y="240" text-anchor="middle">Help desk</text>
+              <text x="360" y="312" text-anchor="middle">Café</text>
+              <circle class="thin" cx="330" cy="342" r="8"/><circle class="thin" cx="390" cy="342" r="8"/>
+              <g class="lbl" text-anchor="middle">
+                <rect class="box" x="108" y="88" width="24" height="24"/><text class="lbl" x="120" y="105">A</text>
+                <rect class="box" x="228" y="88" width="24" height="24"/><text class="lbl" x="240" y="105">B</text>
+                <rect class="box" x="468" y="88" width="24" height="24"/><text class="lbl" x="480" y="105">C</text>
+                <rect class="box" x="108" y="198" width="24" height="24"/><text class="lbl" x="120" y="215">D</text>
+                <rect class="box" x="348" y="198" width="24" height="24"/><text class="lbl" x="360" y="215">E</text>
+                <rect class="box" x="468" y="198" width="24" height="24"/><text class="lbl" x="480" y="215">F</text>
+                <rect class="box" x="108" y="308" width="24" height="24"/><text class="lbl" x="120" y="325">G</text>
+                <rect class="box" x="468" y="308" width="24" height="24"/><text class="lbl" x="480" y="325">H</text>
+              </g>
+              <text class="halo" x="300" y="43" text-anchor="middle">back of the building</text>
+              <path class="solid" d="M240 380 l-9 16 h18 z"/>
+              <text x="240" y="418" text-anchor="middle">Main entrance (you are here)</text>
+              <g class="compass" transform="translate(615 70)"><line class="thin" x1="0" y1="-18" x2="0" y2="18"/><line class="thin" x1="-18" y1="0" x2="18" y2="0"/><path class="solid" d="M0 -22 l-5 10 h10 z"/><path class="solid" d="M0 22 l-5 -10 h10 z"/><path class="solid" d="M22 0 l-10 -5 v10 z"/><path class="solid" d="M-22 0 l10 -5 v10 z"/><text x="0" y="-27" text-anchor="middle">N</text><text x="0" y="37" text-anchor="middle">S</text><text x="33" y="4" text-anchor="middle">E</text><text x="-33" y="4" text-anchor="middle">W</text></g>
+            </svg>`,
             boxTitle: 'Plan locations',
             options: [
               { k: 'A', t: 'A' }, { k: 'B', t: 'B' }, { k: 'C', t: 'C' }, { k: 'D', t: 'D' },

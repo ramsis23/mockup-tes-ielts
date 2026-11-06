@@ -804,11 +804,19 @@
     } else if (g.type === 'match') {
       // Plan/map labelling uses bare letters, so a box listing them would only repeat each letter.
       const lettersOnly = g.options.every(o => !o.t || o.t === o.k);
-      body = `${lettersOnly ? '' : `<div class="opt-box">${g.boxTitle ? `<h4>${g.boxTitle}</h4>` : ''}${g.options.map(o => `<div class="opt-row"><b>${o.k}</b><span>${o.t}</span></div>`).join('')}</div>`}
+      if ((g.display || (lettersOnly ? 'radio' : 'select')) === 'radio') {
+        // One radio list per question, two columns (as in the computer-delivered test).
+        body = `<div class="q-grid">${g.questions.map(q => `<div class="q choice" id="q-${q.n}" data-q="${q.n}">
+          <div class="q-line"><span class="qnum">${q.n}</span><span class="q-text">${q.text}</span></div>
+          <div class="opts">${g.options.map(o => `<label class="opt"><input type="radio" name="r-${q.n}" value="${o.k}"><span class="opt-key">${o.k}</span>${lettersOnly ? '' : `<span>${o.t}</span>`}</label>`).join('')}</div>
+        </div>`).join('')}</div>`;
+      } else {
+        body = `${lettersOnly ? '' : `<div class="opt-box">${g.boxTitle ? `<h4>${g.boxTitle}</h4>` : ''}${g.options.map(o => `<div class="opt-row"><b>${o.k}</b><span>${o.t}</span></div>`).join('')}</div>`}
         ${g.questions.map(q => `<div class="q match" id="q-${q.n}" data-q="${q.n}">
           <span class="qnum">${q.n}</span><span class="q-text">${q.text}</span>
           <select data-q="${q.n}" aria-label="Question ${q.n}"><option value=""></option>${g.options.map(o => `<option value="${o.k}">${o.k}</option>`).join('')}</select>
         </div>`).join('')}`;
+      }
     } else if (g.type === 'multi') {
       body = `<div class="q multi" id="q-${g.ns[0]}" data-qlist="${g.ns.join(' ')}">
         <div class="q-line"><span class="qnum">${g.ns[0]}–${g.ns[g.ns.length - 1]}</span><span class="q-text">${g.text}</span></div>
@@ -818,6 +826,7 @@
     return `<div class="q-group">
       <h3 class="q-range">Questions ${g.from}${g.to !== g.from ? '–' + g.to : ''}</h3>
       <div class="q-instr">${g.instr}</div>
+      ${g.figure ? `<figure class="q-figure">${g.figure}</figure>` : ''}
       ${body}
     </div>`;
   }

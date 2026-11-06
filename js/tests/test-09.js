@@ -100,19 +100,36 @@
         groups: [
           {
             type: 'match', from: 11, to: 15,
-            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 11–15.
-              <table class="form-table" style="text-align:center;margin-top:8px">
-                <tr><td colspan="4"><b>KINGSGATE SHOPPING CENTRE – Ground Floor</b> (North at top)</td></tr>
-                <tr><td>A</td><td>B</td><td>C</td><td>D</td></tr>
-                <tr><td>E</td><td colspan="2">Central Atrium<br>(fountain)</td><td>F</td></tr>
-                <tr><td>G</td><td colspan="2">Main Entrance (South)</td><td>H</td></tr>
-              </table>`,
+            instr: `Label the plan below.<br>Write the correct letter, <b>A–H</b>, next to Questions 11–15.`,
+            figure: `<svg viewBox="0 0 660 440" role="img" aria-label="Plan of the ground floor of Kingsgate Shopping Centre with locations A to H">
+              <text class="fig-title" x="300" y="28" text-anchor="middle">Kingsgate Shopping Centre – Ground Floor</text>
+              <line class="thin" x1="60" y1="140" x2="540" y2="140"/>
+              <line class="thin" x1="180" y1="50" x2="180" y2="370"/><line class="thin" x1="300" y1="50" x2="300" y2="140"/><line class="thin" x1="420" y1="50" x2="420" y2="370"/>
+              <line class="thin" x1="60" y1="270" x2="180" y2="270"/><line class="thin" x1="420" y1="270" x2="540" y2="270"/>
+              <path class="line" d="M270 370 H60 V50 H540 V370 H330"/>
+              <text x="300" y="172" text-anchor="middle">CENTRAL ATRIUM</text>
+              <circle class="water" cx="300" cy="235" r="30"/><circle class="thin" cx="300" cy="235" r="30"/>
+              <text x="300" y="290" text-anchor="middle">fountain</text>
+              <g class="lbl" text-anchor="middle">
+                <rect class="box" x="108" y="83" width="24" height="24"/><text class="lbl" x="120" y="100">A</text>
+                <rect class="box" x="228" y="83" width="24" height="24"/><text class="lbl" x="240" y="100">B</text>
+                <rect class="box" x="348" y="83" width="24" height="24"/><text class="lbl" x="360" y="100">C</text>
+                <rect class="box" x="468" y="83" width="24" height="24"/><text class="lbl" x="480" y="100">D</text>
+                <rect class="box" x="108" y="193" width="24" height="24"/><text class="lbl" x="120" y="210">E</text>
+                <rect class="box" x="468" y="193" width="24" height="24"/><text class="lbl" x="480" y="210">F</text>
+                <rect class="box" x="108" y="308" width="24" height="24"/><text class="lbl" x="120" y="325">G</text>
+                <rect class="box" x="468" y="308" width="24" height="24"/><text class="lbl" x="480" y="325">H</text>
+              </g>
+              <path class="solid" d="M300 380 l-9 16 h18 z"/>
+              <text x="300" y="418" text-anchor="middle">Main entrance (you are here)</text>
+              <g class="compass" transform="translate(615 80)"><line class="thin" x1="0" y1="-18" x2="0" y2="18"/><line class="thin" x1="-18" y1="0" x2="18" y2="0"/><path class="solid" d="M0 -22 l-5 10 h10 z"/><path class="solid" d="M0 22 l-5 -10 h10 z"/><path class="solid" d="M22 0 l-10 -5 v10 z"/><path class="solid" d="M-22 0 l10 -5 v10 z"/><text x="0" y="-27" text-anchor="middle">N</text><text x="0" y="37" text-anchor="middle">S</text><text x="33" y="4" text-anchor="middle">E</text><text x="-33" y="4" text-anchor="middle">W</text></g>
+            </svg>`,
             boxTitle: 'Plan locations',
             options: [
-              { k: 'A', t: 'north-west corner' }, { k: 'B', t: 'north side, left of centre' },
-              { k: 'C', t: 'north side, right of centre' }, { k: 'D', t: 'north-east corner' },
-              { k: 'E', t: 'west of the atrium' }, { k: 'F', t: 'east of the atrium' },
-              { k: 'G', t: 'left of the main entrance' }, { k: 'H', t: 'right of the main entrance' }
+              { k: 'A', t: 'A' }, { k: 'B', t: 'B' },
+              { k: 'C', t: 'C' }, { k: 'D', t: 'D' },
+              { k: 'E', t: 'E' }, { k: 'F', t: 'F' },
+              { k: 'G', t: 'G' }, { k: 'H', t: 'H' }
             ],
             questions: [
               { n: 11, text: 'Customer services', answer: 'H' },
