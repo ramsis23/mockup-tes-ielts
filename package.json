@@ -1,7 +1,7 @@
 {
   "name": "ielts-practice",
   "private": true,
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "IELTS computer-delivered practice tests (web, desktop and Android).",
   "scripts": {
     "build:web": "node tools/build-web.mjs",
