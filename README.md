@@ -140,8 +140,9 @@ npm run android:apk        # hasil: android/app/build/outputs/apk/release/app-re
 
 Coba mode penyimpanan lokal di browser biasa dengan `http://localhost:5173/?local=1`.
 
-Listening memakai MP3 di folder `audio/`. WebView Android umumnya tidak mendukung text-to-speech browser, jadi
-part yang belum punya MP3 tidak bersuara di Android.
+Listening memakai MP3 di folder `audio/`. Part yang belum punya MP3 dibacakan oleh mesin text-to-speech Android
+(plugin `@capacitor-community/text-to-speech`), karena WebView Android tidak punya Web Speech. Jika tidak ada suara,
+pasang **Speech Services by Google** dan data suara English (UK) di Pengaturan → Bahasa → Output text-to-speech.
 
 ---
 

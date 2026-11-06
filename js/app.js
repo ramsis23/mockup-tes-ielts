@@ -62,15 +62,41 @@
   }
 
   /* ---------------------------------------------------------------- speech */
+  // Android app: the WebView has no speechSynthesis, so use the device's TTS engine via the
+  // @capacitor-community/text-to-speech plugin (exposed by the native bridge).
+  const NativeTTS = window.Capacitor && typeof window.Capacitor.isNativePlatform === 'function' && window.Capacitor.isNativePlatform()
+    && window.Capacitor.Plugins && window.Capacitor.Plugins.TextToSpeech || null;
+
   const Speech = {
-    ok: 'speechSynthesis' in window,
+    ok: !!NativeTTS || 'speechSynthesis' in window,
+    native: NativeTTS,
     v: {}, volume: 0.8, queue: [], i: 0, active: false, keep: [], to: null,
     init() {
       if (!this.ok) return;
-      const pick = () => {
+      const pick = list => {
         const novelty = /bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|albert|junior|ralph|grandma|grandpa|eddy|flo|reed|rocko|sandy|shelley/i;
-        const all = speechSynthesis.getVoices().filter(v => /^en/i.test(v.lang) && !novelty.test(v.name));
+        const all = list.filter(v => /^en/i.test(v.lang) && !novelty.test(v.name));
         if (!all.length) return;
+        if (this.native) {
+          // Android voice names carry no gender ("en-gb-x-gbb-local"): give each role a different
+          // British voice where possible (the pitch in say() also separates them). Offline voices first.
+          all.sort((a, b) => (/network/i.test(a.name) ? 1 : 0) - (/network/i.test(b.name) ? 1 : 0));
+          const gb = all.filter(v => /en[-_]GB/i.test(v.lang));
+          const pool = gb.length >= 3 ? gb : gb.concat(all.filter(v => !gb.includes(v)));
+          // Google TTS en-GB variants: gba/gbc/gbg are female, gbb/gbd/rjs male.
+          const F = /-(gba|gbc|gbg)-/i, M = /-(gbb|gbd|rjs)-/i;
+          const males = pool.filter(v => M.test(v.name));
+          this.v = {
+            n: males[0] || pool[0],
+            f: pool.find(v => F.test(v.name)) || pool[1] || pool[0],
+            m: males[1] || males[0] || pool[2] || pool[0]
+          };
+          this.all = all;
+          this.quality = () => 0;
+          const saved = state.settings.voices || {};
+          Object.keys(saved).forEach(r => { const v = all.find(x => x.name === saved[r]); if (v) this.v[r] = v; });
+          return;
+        }
         // Prefer higher-quality voices (neural/enhanced/premium) when the system has them.
         const quality = v => /natural|neural|enhanced|premium|siri/i.test(v.name) ? 2 : /google/i.test(v.name) ? 1 : 0;
         all.sort((a, b) => quality(b) - quality(a));
@@ -88,10 +114,27 @@
         const saved = state.settings.voices || {};
         Object.keys(saved).forEach(r => { const v = all.find(x => x.name === saved[r]); if (v) this.v[r] = v; });
       };
-      pick();
-      speechSynthesis.onvoiceschanged = pick;
+      if (this.native) {
+        this.native.getSupportedVoices()
+          // Android repeats display names ("English United Kingdom"); voiceURI is unique.
+          .then(r => pick((r.voices || []).map((v, i) => ({ name: v.voiceURI || v.name, lang: v.lang, index: i }))))
+          .catch(() => { this.all = []; });
+        return;
+      }
+      pick(speechSynthesis.getVoices());
+      speechSynthesis.onvoiceschanged = () => pick(speechSynthesis.getVoices());
     },
     say(text, role, cb) {
+      if (this.native) {
+        const voice = this.v[role] || this.v.n;
+        let done = false;
+        const fin = () => { if (!done) { done = true; cb(); } };
+        this.native.speak({
+          text, lang: voice ? voice.lang : 'en-GB', voice: voice ? voice.index : undefined,
+          rate: 0.95, pitch: role === 'f' ? 1.1 : role === 'm' ? 0.9 : 1, volume: this.volume, queueStrategy: 0
+        }).then(fin, fin);
+        return;
+      }
       const u = new SpeechSynthesisUtterance(text);
       const voice = this.v[role] || this.v.n;
       if (voice) { u.voice = voice; u.lang = voice.lang; } else u.lang = 'en-GB';
@@ -138,7 +181,8 @@
       this.active = false;
       clearTimeout(this.to);
       if (this.el) { this.el.onended = this.el.onerror = null; this.el.pause(); this.el = null; }
-      if (this.ok) speechSynthesis.cancel();
+      if (this.native) this.native.stop().catch(() => {});
+      else if (this.ok) speechSynthesis.cancel();
       this.keep = [];
     }
   };
@@ -603,11 +647,16 @@
   function renderVoicePicker() {
     const box = $('#voiceBox');
     if (!box) return;
-    const all = Speech.all || [];
-    if (!all.length) { setTimeout(renderVoicePicker, 400); return; }
+    const all = Speech.all;
+    if (!all) { setTimeout(renderVoicePicker, 400); return; }
+    if (!all.length) {
+      box.innerHTML = '<p class="warn-box small">Tidak ada suara bahasa Inggris di mesin text-to-speech perangkat ini. Pasang <b>Speech Services by Google</b> dan unduh data suara English (UK) di Pengaturan → Bahasa → Output text-to-speech.</p>';
+      return;
+    }
     const best = all.filter(v => Speech.quality(v) === 2).length;
     box.innerHTML = `<h3>Voices</h3>
-      ${best ? `<p class="small">${best} natural-sounding voice${best > 1 ? 's' : ''} found and selected automatically.</p>`
+      ${Speech.native ? '<p class="small">Suara dari mesin text-to-speech Android. Bagian Listening yang punya rekaman MP3 memakai rekamannya.</p>'
+        : best ? `<p class="small">${best} natural-sounding voice${best > 1 ? 's' : ''} found and selected automatically.</p>`
         : '<p class="warn-box small">Hanya suara standar (terdengar seperti robot) yang tersedia di browser ini. Untuk suara natural, buka aplikasi ini di <b>Microsoft Edge</b> (suara “Natural”), atau unduh suara <b>Enhanced/Premium</b> di macOS: System Settings → Accessibility → Spoken Content → System voice → Manage Voices, lalu buka ulang browser.</p>'}
       ${Object.entries(VOICE_ROLES).map(([r, [label]]) => `
         <div class="voice-row"><label for="vs-${r}">${label}</label>
